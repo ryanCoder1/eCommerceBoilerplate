@@ -1,0 +1,383 @@
+
+// Font Awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+// Variables
+@import 'variables';
+
+// Mixins
+@import 'mixins';
+
+// component imports
+@import 'sidebarmenu';
+@import 'topbarmenu';
+@import 'dashboardforms';
+@import 'headernav';
+@import 'categoryproducts';
+@import 'homecomponents';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+html, body {
+  height: 100%;
+  margin: 0 auto;
+
+
+}
+body {
+  max-width: 1600px;
+  overflow-x: hidden;
+  border-right: solid 2px $f2White;
+  border-left: solid 2px $f2White;
+}
+*::-webkit-scrollbar {
+    width: 4px;
+    background-color: #f1f1f1;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #d9d9d9;
+}
+* {
+  box-sizing: border-box;
+}
+
+// FORMS STYLE
+
+// the blue semitransparent background container
+.formWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 300;
+  top: 0;
+  left: 0;
+  background-color: rgba(33, 59, 80, .3);
+  overflow: auto;
+
+}
+
+.formWrapperDiv{
+   max-width: 425px;
+   width: 100%;
+   margin: 0 auto 200px auto;
+   position: relative;
+   top: 200px;
+   left: -3%;
+
+}
+@media only screen and (max-width: 768px){
+.formWrapperDiv{
+  max-width: 425px !important;
+  width: 100% !important;
+  position: relative;
+  top: 200px;
+  left: 0%;
+}
+}
+.non-popup-form-wrapper {
+
+    height: 100%;
+    width: 100%;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // z-index: 100;
+    display: flex;
+    justify-content: center;
+
+
+    // All the forms with adjusted form($height, $top(position))
+    #adminCreateForm {
+      @include form(900px, 900px, $top: 200px, $mainBlue: $mainBlue, $white: $white, $maxWidth: 410px);
+    }
+    // submit btns in content area
+    .admin-create-btn {
+      @include submitBtn($bgColor: $mainBlue, $hoverBgColor: $hoverBlue, $textColor: $f2White);
+    }
+    #adminLoginForm {
+      @include form(500px, 500px, $top: 200px, $mainBlue: $mainBlue, $white: $white, $maxWidth: 410px);
+    }
+    // submit btns in content area
+    .admin-login-btn {
+      @include submitBtn($bgColor: $mainBlue, $hoverBgColor: $hoverBlue, $textColor: $f2White);
+    }
+    #adminInviteForm {
+      @include form(700px, 700px, $top: 200px, $mainBlue: $mainBlue, $white: $white, $maxWidth: 410px);
+    }
+    // submit btns in content area
+    .admin-invite-btn {
+      @include submitBtn($bgColor: $mainBlue, $hoverBgColor: $hoverBlue, $textColor: $f2White);
+    }
+    #loginForm {
+      @include form(500px, 500px, $top: 200px, $mainBlue: $mainBlue, $white: $white, $maxWidth: 410px);
+    }
+    #sendEmailForm {
+      @include form(400px, 400px, $top: 200px, $mainBlue: $mainBlue, $white: $white, $maxWidth: 410px);
+    }
+    #resetPasswordForm {
+      @include form(500px, 500px, $top: 200px, $mainBlue: $mainBlue, $white: $white, $maxWidth: 410px);
+    }
+    #insertForm {
+      @include form(1450px, 1650px, $top: 150px, $mainBlue: $mainBlue, $white: $white, $maxWidth: 550px);
+    }
+
+}
+// All the forms with adjusted form($height, $heightSmall, $top(position of form on page), $mainBlue, $white, $maxWidth)
+
+#outfitAddressForm {
+  @include form(900px, 900px, -150px, $mainBlue, $white, $maxWidth: 410px);
+  @include width-form-device();
+}
+#searchAddressForm {
+  @include form(700px, 700px, -150px, $mainBlue, $white, $maxWidth: 410px);
+  @include width-form-device();
+}
+#searchNameForm {
+  @include form(500px, 500px, -150px, $mainBlue, $white, $maxWidth: 410px);
+  @include width-form-device();
+}
+#searchOutfitForm {
+  @include form(400px, 400px, -150px, $mainBlue, $white, $maxWidth: 410px);
+  @include width-form-device();
+}
+/* .formExit absolute -> top = the forms top(position) minus 20px up above */
+.formExit {
+   padding: 5px 10px;
+   border-radius: 50%;
+   -webkit-border-radius: 50%;
+   background-color: #FFFFFF;
+   color: #213B50;
+   border: solid thin #213B50;
+   position: absolute;
+   top: -170px;
+   right: -1%;
+   z-index: 120;
+   font-size: 20px;
+   font-weight: bold;
+   cursor: pointer;
+}
+
+
+
+  .formHeadSearch {
+    color: rgb(147, 147, 147);
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .formHeadSearchWay {
+    font-size: 19px;
+    text-decoration: underline;
+  }
+
+  .absolute-sm-position {
+    @include positionAtScreenSize("768px", "absolute", "100px", "0px");
+
+  }
+
+  /*****************
+
+  Dashboard
+
+  *******************/
+@media only screen and (max-width: 768px){
+  .dashboard-header-width {
+    width: 155px;
+
+  }
+
+}
+
+/******************
+
+Content components
+
+*******************/
+
+.outfit-container {
+  background-color: $body-bg;
+}
+
+// Jobs list Design @mixin
+#currentJobsContainer {
+  @include jobs-list-design($mainBlue: $mainBlue, $white: $white, $margTop: 150px);
+
+  .searchFilterWrapper {
+    margin: 0 auto;
+    width: 300px;
+
+  }
+
+  .searchFilter {
+    width: 100%;
+    border: solid thin #FFFFFF;
+    padding: 10px;
+    box-shadow: 0 0 20px 1px rgba(0,0,0, .2);
+    font-size: 18px;
+  }
+  .searchFilter ::placeholder {
+    color: rgb(177, 181, 178);
+  }
+  .searchFilter:focus {
+    outline: none;
+  }
+}
+// Infield page for list of jobs
+#inFieldContainer {
+  @include jobs-list-design($mainBlue: $mainBlue, $white: $white, $margTop: 0px);
+}
+// Finished page for list of jobs
+#finishedContainer {
+  @include jobs-list-design($mainBlue: $mainBlue, $white: $white, $margTop: 150px);
+}
+// Records page for list of jobs
+#recordsContainer {
+  @include jobs-list-design($mainBlue: $mainBlue, $white: $white, $margTop: 0px);
+}
+// Payments page for list of jobs
+#paymentsContainer {
+  @include jobs-list-design($mainBlue: $mainBlue, $white: $white, $margTop: 0px);
+}
+
+// submit btns in content area
+.infieldBtn {
+  @include submitBtn($bgColor: $green , $hoverBgColor: $greenLight , $textColor: $mainBlue);
+}
+.gmapDirectionsBtn {
+  @include submitBtnNoGrowText($bgColor: $mainBlue , $hoverBgColor: $hoverBlue , $textColor: $white);
+}
+/*******************
+
+ FONT AWESOME
+
+********************/
+
+  .color-caret {
+    color: $caretGrey;
+  }
+  .color-caret:hover {
+    color: $caretGreyHover !important;
+  }
+
+  .display-caret  {
+    @include displayAtScreenSize("768px");
+    font-size: 20px;
+    cursor: pointer;
+  }
+  @media only screen and (max-width: 768px){
+    .caret-mr {
+      margin-right: 2px;
+    }
+    .anchor-charet {
+      cursor: pointer;
+    }
+  }
+
+
+
+/**************************************
+  timer animation for loading circles
+***************************************/
+.loader-dots {
+  width: 10px;
+  height: 10px;
+  background-color: $textGrey;
+  margin: 10px;
+  display: inline-block;
+  @include border-radius(50%);
+  @include scale(.2);
+  @include animation-no-linear(blink, 1s, 0s, infinite);
+}
+
+@keyframes blink{
+  50%{
+    @include scale(1);
+  }
+  100%{
+    @include scale(0);
+  }
+}
+.circle-one {
+  @include animation-delay(0s);
+
+}
+.circle-two {
+  @include animation-delay(.12s);
+
+}
+.circle-three {
+  @include animation-delay(.22s);
+
+}
+
+/**************************************
+  timer animation for loading circles
+***************************************/
+.page-loader-dots {
+  width: 20px;
+  height: 20px;
+  background-color: $textGrey;
+  margin: 10px;
+  display: inline-block;
+  @include border-radius(50%);
+  @include scale(.2);
+  @include animation-no-linear(blinkPage, 1s, 0s, infinite);
+}
+
+@keyframes blinkPage{
+  50%{
+    @include scale(1);
+  }
+  100%{
+    @include scale(0);
+  }
+}
+.page-loader-dots.page-circle-one {
+  @include animation-delay(0s);
+
+}
+.page-loader-dots.page-circle-two {
+  @include animation-delay(.12s);
+
+}
+.page-loader-dots.page-circle-three {
+  @include animation-delay(.22s);
+
+}
+// if variable active is true
+.page-loader-move {
+  width: 20px;
+  height: 20px;
+  background-color: $textGrey;
+  margin: 10px;
+  display: inline-block;
+  @include border-radius(50%);
+  @include scale(.2);
+  @include animation(blinkPageLeave, .4s, ease-in-out, 0s, forwards);
+}
+@keyframes blinkPageLeave{
+
+  25%{
+    @include scale(1);
+  }  100%{
+    @include translateX(650px);
+    @include opacity(0);
+  }
+
+}
+.page-loader-move.page-circle-one {
+  @include animation-delay(.22s);
+
+}
+.page-loader-move.page-circle-two {
+  @include animation-delay(.12s);
+
+}
+.page-loader-move.page-circle-three {
+  @include animation-delay(0s);
+
+}

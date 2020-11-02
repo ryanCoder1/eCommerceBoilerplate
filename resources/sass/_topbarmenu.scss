@@ -1,0 +1,54 @@
+.top-bar-menu-container {
+  background-color: $white;
+  margin-left: 280px;
+  padding: 25px 0;
+  vertical-align: middle;
+  color: $mainBlue;
+
+  .top-bar-hamburger {
+    margin-left: 25px;
+    font-size: 20px;
+    display: none;
+  }
+  .top-bar-user {
+    float: right;
+    margin: -10px 50px 25px 0;
+
+    a{
+      color: $mainBlue;
+    }
+  }
+
+  .top-bar-user div{
+    display: inline-block;
+    margin-left: 25px;
+  }
+  .top-bar-plus {
+
+  }
+  .top-bar-user-info {
+    text-transform: capitalize;
+  }
+  .i-top-bar-info {
+    width: 25px;
+
+  }
+
+}
+@media only screen and (max-width: 700px){
+  .top-bar-menu-container {
+    margin-left: 0;
+    padding: 10px 0;
+
+
+    .top-bar-hamburger {
+      display: block;
+      cursor: pointer;
+    }
+    .top-bar-user {
+      float: right;
+      margin: -27px 25px 0 0;
+    }
+
+  }
+}

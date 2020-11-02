@@ -1,0 +1,82 @@
+
+
+
+.dashboard-page-containers {
+    margin: 0 0 0 280px;
+    padding: 30px 20px 0 20px;
+
+   @include dashboard-h3($mainBlue, $white);
+   @include dashboard-h4($textGrey, $white);
+   .h5 {
+     @include dashboard-h5($textGrey, $white);
+   }
+   .form {
+       @include forms-dashboard(100%, 100%, $text: $mainBlue, $bg: $white, $fileBg: $blue, $textAlt: $blue);
+       .dashboard-page-btn {
+           @include dashboardSubmitBtn($bgColor: $mainBlue, $hoverBgColor: $hoverBlue, $textColor: $f2White);
+       }
+       .dashboard-social-media-btn {
+           @include dashboardSubmitBtn($bgColor: $blue, $hoverBgColor: $blue, $textColor: $f2White);
+       }
+
+   }
+   .dashboard-full-width-btn {
+       @include dashboardFullWidthBtn($bgColor: $mainBlue, $hoverBgColor: $hoverBlue, $textColor: $f2White);
+   }
+   .dashboard-edit-btn {
+       @include dashboardSubmitLight($bgColor: $f2White, $hoverBgColor: $whiteDark, $textColor: $mainBlue);
+   }
+   .checkbox {
+      @include checkbox();
+   }
+   .dashboard-add-btn {
+       @include dashboardSubmitBtn($bgColor: $mainBlue, $hoverBgColor: $mainBlue, $textColor: $f2White);
+   }
+  /****************************
+  product edit image / groups
+  *****************************/
+
+    .index-text {
+      font-size: 25px;
+      color: #213B50;
+      text-align: center;
+      vertical-align: middle;
+      @include scale(0.1);
+      @include animation(scaleText, .4s, linear, 0s, forwards);
+    }
+    @keyframes scaleText {
+      100%{
+        @include scale(1);
+      }
+    }
+    @-webkit-keyframes scaleText {
+      100%{
+        @include scale(1);
+      }
+    }
+    @-moz-keyframes scaleText {
+      100%{
+        @include scale(1);
+      }
+    }
+    @-o-keyframes scaleText {
+      100%{
+        @include scale(1);
+      }
+    }
+    @-ms-keyframes scaleText {
+      100%{
+        @include scale(1);
+      }
+    }
+  .product-edit-child-container {
+    @include input-file($blue);
+  }
+
+}
+@media only screen and (max-width: 700px){
+  .dashboard-page-containers {
+      margin: 0 0 0 0;
+      padding: 30px 20px 0 20px;
+    }
+}

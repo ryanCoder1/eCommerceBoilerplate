@@ -1,0 +1,139 @@
+
+
+.side-bar-menu-container {
+  width: 280px;
+  // min-height: 1200px;
+  background-color: $mainBlue;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  z-index: 100;
+
+  .side-bar-close {
+    font-size: 25px;
+    color: $f2White;
+    position: absolute;
+    top: -30px;
+    right: -45px;
+    display: none;
+    cursor: pointer;
+  }
+  .side-bar-head-container {
+    position: relative;
+    width: 200px;
+    margin: 25px auto 0 auto;
+  }
+  .side-bar-head-1, .side-bar-head-2 {
+    display: block;
+    color: $f2White;
+  }
+  .side-bar-head-1 {
+
+    font-size: 20px;
+
+  }
+  .side-bar-head-2 {
+    color: $greenLighter;
+    font-size: 18px;
+    position: relative;
+    top: -10px;
+    left: 50px;
+  }
+
+  .side-bar-ul {
+    margin: 25px 0 0 0;
+    padding: 25px 0 0 0;
+    list-style: none;
+    border-top: solid 1px $blueLightMain;
+  }
+  .side-bar-ul li {
+    margin: 8px 0 0 0;
+    padding: 5px 0 5px 20px;
+    position: relative;
+    border-left: solid 2px transparent;
+    @include transition-basic(.3s);
+
+    &:hover {
+      background-color: $blueDark;
+      border-left: solid 2px $greenLight;
+        a {
+          color: $greenLighter;
+          text-decoration: none;
+        }
+        i {
+          color: $greenLight;
+        }
+        .drop-down-uls li {
+          border-left: solid 2px transparent;
+        }
+        .drop-down-uls li a {
+          color: $f2White;
+        }
+    }
+
+  }
+  .side-bar-ul li a {
+    color: $f2White;
+    text-transform: capitalize;
+
+  }
+
+   i {
+     width: 25px;
+     position: relative;
+     z-index: 5;
+     height: 20px;
+     width: 20px;
+     color: $whiteDark;
+     margin-right: 10px;
+     text-align: center;
+     display: inline-block;
+     @include transition-basic(.3s);
+  }
+  .i-visited {
+    height: 15px !important;
+    width: 20px;
+  }
+  .drop-down-uls {
+    list-style: none;
+  }
+  .drop-down-uls li {
+    padding: 0 0 0 0 !important;
+
+  }
+  .drop-down-uls li a{
+    @include transition-basic(.3s);
+    &:hover {
+      color: $greenLighter !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px){
+
+  .side-bar-menu-container.active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    @include transition-basic(.6s);
+  }
+
+  .side-bar-menu-container {
+    width: 280px;
+    background-color: $mainBlue;
+    position: absolute;
+    top: 0;
+    left: -280px;
+    bottom: 0;
+    padding: 0;
+    @include transition-basic(.6s);
+
+    .side-bar-close {
+      display: block;
+    }
+
+  }
+}

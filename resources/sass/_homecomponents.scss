@@ -1,0 +1,14 @@
+// HOME PAGE COMPONENT STYLES
+.home-page {
+  .products-container {
+    @include productsContainer();
+    @include products();
+  }
+  #featuredSlideContainer {
+    @include sliderFeatured($wrapBgColor: $white, $titleBgColor: $greenLight);
+  }
+  #specialsSlideContainer{
+    @include sliderSpecials();
+  }
+
+}
