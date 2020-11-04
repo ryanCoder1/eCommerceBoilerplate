@@ -7,3 +7,10 @@ export function getCategoryId(){
   }
   return JSON.parse(categoryStr);
 }
+export function getProductId(){
+  const productStr = localStorage.getItem("productId");
+  if(!productStr) {
+    return null;
+  }
+  return JSON.parse(productStr);
+}

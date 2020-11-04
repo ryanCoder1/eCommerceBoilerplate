@@ -71,12 +71,12 @@ router.beforeEach((to, from, next) =>{
   else{
     next();
   }
-  if(to.path == '/home' || to.path.indexOf('/category/') != -1){
+  if(to.path == '/home' || to.path.indexOf('/category/') != -1 || to.path.indexOf('/product/') != -1){
       store.dispatch('admin/logoutQuiet');
     setTimeout(() => {
       router.app.activeLoader = false;
       router.app.load = false;
-    },10)
+    },5)
     setTimeout(() => {
       router.app.activeLoader = true;
     },2250)
@@ -130,10 +130,11 @@ mounted() {
 
 },
 template: `<div>
-           <nav-header></nav-header>
+           <nav-header
+           v-if="activeLoader"></nav-header>
            <router-view ></router-view>
            <footer-full
-           v-if="load"></footer-full>
+           v-if="activeLoader"></footer-full>
            <loader
             v-if="!load"
             v-bind:active-loader="activeLoader"></loader>

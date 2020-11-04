@@ -46,7 +46,7 @@ class ProductsController extends Controller
    * @param  \App\Clientside\ProductsController
    * @return \Illuminate\Http\Response
    */
-  public static function show(Request $request)
+  public function show(Request $request)
   {
       $products = DB::table('products')
                       ->select('products.*')
@@ -60,7 +60,7 @@ class ProductsController extends Controller
  * @param  \App\Clientside\ProductsController
  * @return \Illuminate\Http\Response
  */
-public static function showCountProductsCategory(Request $request)
+public function showCountProductsCategory(Request $request)
 {
     $count = DB::table('products')
                     ->select('category_id', DB::raw('count(*) as num'))
@@ -75,7 +75,7 @@ public static function showCountProductsCategory(Request $request)
 * @param  \App\Clientside\ProductsController
 * @return \Illuminate\Http\Response
 */
-public static function showCategoryProducts(Request $request)
+public function showCategoryProducts(Request $request)
 {
       $category = DB::table('category_products')
                       ->select('category_products.*')
@@ -109,13 +109,42 @@ public static function showCategoryProducts(Request $request)
       return response()->json(['success' => true, 'category' => $category, 'products' => $products, 'product_styles' => $styles, 'product_default_image' => $product_default_image]);
 
 }
+/**
+* Display the specified resource.
+*
+* @param  \App\Clientside\ProductsController
+* @return \Illuminate\Http\Response
+*/
+public function showProduct(Request $request)
+{
+
+      $product = DB::table('products')
+                      ->select('products.*')
+                      ->where('id', '=', $request->input('product_id'))
+                      ->get();
+
+
+      $product_styles = DB::table('product_styles')
+                      ->select('product_styles.*')
+                      ->where('product_id', '=', $request->input('product_id'))
+                      ->groupBy('color')
+                      ->get();
+
+      $product_default_image = DB::table('product_default_image')
+                        ->select('product_default_image.*')
+                        ->where('id', '=', 1)
+                        ->get();
+
+      return response()->json(['success' => true, 'product' => $product, 'product_styles' => $product_styles, 'product_default_image' => $product_default_image]);
+
+}
   /**
  * Display the specified resource.
  *
  * @param  \App\ProductsController
  * @return \Illuminate\Http\Response
  */
-public static function showGroupProductImage(Request $request)
+public function showGroupProductImage(Request $request)
 {
 
     $groupImage = DB::table('product_styles')

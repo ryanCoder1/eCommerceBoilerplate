@@ -6132,6 +6132,12 @@ SLIDER FEATURED ON HOME PAGE
 
 **********************************/
 
+/***********************************
+
+PRODUCT PAGE
+
+***********************************/
+
 /*****************************
 
 BROWSER FRIENDLY STYLES
@@ -8609,6 +8615,130 @@ PRODUCTS LIST
 
 .home-page #specialsSlideContainer .specials-bullets.special-active {
   background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.product-page-container {
+  padding: 100px 0 0 0;
+  display: grid;
+  grid-template-columns: -webkit-max-content -webkit-max-content;
+  grid-template-columns: max-content max-content;
+  justify-content: space-around;
+  align-content: start;
+  grid-gap: 25px;
+  grid-template-areas: "info  add" "choose  ." "details  .";
+}
+
+.product-page-container .product-info-wrapper {
+  grid-area: info;
+}
+
+.product-page-container .product-add-wrapper {
+  grid-area: add;
+}
+
+.product-page-container .product-choose-wrapper {
+  grid-area: choose;
+}
+
+.product-page-container .product-details-wrapper {
+  grid-area: details;
+}
+
+@media only screen and (max-width: 768px) {
+  .product-page-container {
+    grid-template-columns: -webkit-max-content;
+    grid-template-columns: max-content;
+    grid-gap: 25px;
+    grid-template-areas: "info" "choose" "add" "details";
+  }
+}
+
+.product-page-container .product-info-wrapper {
+  display: grid;
+  grid-template-columns: -webkit-max-content -webkit-max-content;
+  grid-template-columns: max-content max-content;
+  justify-content: center;
+  align-content: start;
+  grid-gap: 25px;
+  grid-template-areas: "image title" "image ratings" "image price" "image size" "image colors";
+}
+
+.product-page-container .product-info-wrapper .info-title {
+  grid-area: title;
+}
+
+.product-page-container .product-info-wrapper .info-image {
+  grid-area: image;
+}
+
+.product-page-container .product-info-wrapper .info-ratings {
+  grid-area: ratings;
+}
+
+.product-page-container .product-info-wrapper .info-price {
+  grid-area: price;
+}
+
+.product-page-container .product-info-wrapper .info-size {
+  grid-area: size;
+}
+
+.product-page-container .product-info-wrapper .info-colors {
+  grid-area: colors;
+}
+
+@media only screen and (max-width: 768px) {
+  .product-page-container .product-info-wrapper {
+    grid-template-columns: -webkit-max-content;
+    grid-template-columns: max-content;
+    grid-gap: 25px;
+    grid-template-areas: "title" "ratings" "image" "price" "size" "colors";
+  }
+}
+
+.product-page-container .product-info-wrapper .info-title > p {
+  font-size: 20px;
+  color: #213B50;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.product-page-container .product-info-wrapper .info-ratings {
+  margin: 0;
+  padding: 0;
+}
+
+.product-page-container .product-info-wrapper .info-image img {
+  max-width: 350px;
+  width: auto;
+}
+
+.product-page-container .product-info-wrapper .info-price-original {
+  color: #8d9294;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.product-page-container .product-info-wrapper .info-price-is-sale {
+  text-decoration: line-through;
+}
+
+.product-page-container .product-info-wrapper .info-sale-price {
+  display: inline-block;
+  color: #e3342f !important;
+  text-decoration: line-through;
+}
+
+.product-page-container .product-info-wrapper .info-price-actual {
+  margin: 0;
+  padding: 0;
+}
+
+.product-page-container .product-info-wrapper .info-price-actual-price {
+  font-size: 22px !important;
+  font-weight: bold !important;
+  color: #213B50 !important;
 }
 
 /*!

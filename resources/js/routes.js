@@ -34,6 +34,7 @@ import AdminCreateAccount from './components/adminAuth/admincreateaccount.vue';
 import Admin from './components/adminAuth/admin.vue';
 import Home from './components/clientside/home.vue';
 import CateogryProducts from './components/clientside/category.vue';
+import Product from './components/clientside/product/product.vue';
 import DashboardLayout from './components/adminDashboard/dashboardlayout.vue';
 import PageNotFound from './components/pages/pagenotfound.vue';
 import FeatureNeedsService from './components/pages/featureneedsservice.vue';
@@ -65,7 +66,13 @@ export const routes = [
        requiresAuth: false
    }
 },
-
+{ path: '/product/:product',
+  component: Product,
+  name: 'Product',
+  meta: {
+      requiresAuth: false
+  }
+},
   { path: '/login',
    component: Login,
     name: 'Login',
