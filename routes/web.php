@@ -109,6 +109,7 @@ Route::group([ 'middleware' => 'CheckDashboardToken'],function () {
   Route::post('/showcategoryproducts', 'Clientside\ProductsController@showCategoryProducts');
   Route::post('/showproductsclienthome', 'Clientside\ProductsController@showProductsHome');
   Route::post('/showgroupproductimage', 'Clientside\ProductsController@showGroupProductImage');
+  Route::post('/showgroupcolor', 'Clientside\ProductsController@showGroupColor');
   Route::post('/showproduct', 'Clientside\ProductsController@showProduct');
   Route::post('/socialmediashowclient', 'Clientside\PersonalInfoController@socialMediaShow');
   Route::post('/socialmediauseclient', 'Clientside\PersonalInfoController@socialMediaUseShow');

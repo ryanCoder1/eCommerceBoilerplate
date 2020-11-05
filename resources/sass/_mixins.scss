@@ -2138,9 +2138,8 @@ PRODUCT PAGE
     grid-template-columns: max-content max-content;
     justify-content: center;
     align-content: start;
-    grid-gap: 25px;
+    grid-column-gap: 25px;
     grid-template-areas:  "image title"
-                          "image ratings"
                           "image price"
                           "image size"
                           "image colors";
@@ -2150,9 +2149,6 @@ PRODUCT PAGE
     }
     .info-image {
       grid-area: image;
-    }
-    .info-ratings {
-      grid-area: ratings;
     }
     .info-price {
       grid-area: price;
@@ -2193,10 +2189,12 @@ PRODUCT PAGE
     margin: 0;
     padding: 0;
   }
-  .info-image img {
+  .info-image  {
     max-width: 350px;
     width: auto;
-
+  }
+  .info-image img {
+    width: 100%;
   }
   .info-price-original {
     color: $priceColor;
@@ -2222,8 +2220,26 @@ PRODUCT PAGE
     color: $priceActual !important;
   }
 }
+@mixin info-size(){
+// size selection option
 
 
+
+}
+@mixin info-colors(){
+
+  min-height: 50px;
+
+
+  .slide-bg-color-hex {
+    width: 26px;
+    height: 26px;
+    margin: 5px;
+    display: inline-block;
+    box-shadow: 0 4px 3px 1px rgba(0,0,0, .5);
+    border-radius: 50%;
+  }
+}
 /*****************************
 
 BROWSER FRIENDLY STYLES

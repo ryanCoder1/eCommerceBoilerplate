@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->float('sale_price', 10,2)->nullable();
             $table->integer('in_stock')->nullable();
             $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->string('image_name')->nullable();
             $table->string('image_mime')->nullable();
             $table->string('image_path')->nullable();

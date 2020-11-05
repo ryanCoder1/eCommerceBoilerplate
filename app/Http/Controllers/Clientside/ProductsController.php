@@ -127,17 +127,57 @@ public function showProduct(Request $request)
       $product_styles = DB::table('product_styles')
                       ->select('product_styles.*')
                       ->where('product_id', '=', $request->input('product_id'))
-                      ->groupBy('color')
                       ->get();
+     $product_styles_size = DB::table('product_styles')
+                    ->select('product_styles.*')
+                    ->where('product_id', '=', $request->input('product_id'))
+                    ->groupBy('dimension')
+                    ->orderByDesc('dimension')
+                    ->get();
 
       $product_default_image = DB::table('product_default_image')
                         ->select('product_default_image.*')
                         ->where('id', '=', 1)
                         ->get();
 
-      return response()->json(['success' => true, 'product' => $product, 'product_styles' => $product_styles, 'product_default_image' => $product_default_image]);
+      return response()->json(['success' => true, 'product' => $product, 'product_styles' => $product_styles, 'product_styles_size' => $product_styles_size, 'product_default_image' => $product_default_image]);
 
 }
+/**
+* Display the specified resource.
+*
+* @param  \App\Clientside\ProductsController
+* @return \Illuminate\Http\Response
+*/
+public function showGroupColor(Request $request)
+{
+
+     $product_main_color = DB::table('products')
+                    ->select('products.*')
+                    ->where('size', '=', $request->input('size'))
+                    ->where('id', '=', $request->input('product_id'))
+                    ->get();
+      $styles = array();
+        if(count($product_main_color) > 0){
+          // push $product_main_color into array $styles
+
+            array_push($styles, $product_main_color[0] );
+          }
+      $product_styles_color = DB::table('product_styles')
+                     ->select('product_styles.*')
+                     ->where('dimension', '=', $request->input('size'))
+                     ->where('product_id', '=', $request->input('product_id'))
+                     ->get();
+        if(count($product_styles_color) > 0){
+              // loop thru and push all $product_styles_color results into $styles array
+              for($i = 0; $i < count($product_styles_color); $i++){
+                     array_push($styles, $product_styles_color[$i] );
+                  }
+          }
+      return response()->json(['success' => true, 'product_styles_color' => $styles]);
+
+}
+
   /**
  * Display the specified resource.
  *

@@ -7,19 +7,25 @@
         </product-title>
 
         <div class="info-image">
-          <img v-if="product.image_name !== undefined && product.image_name != null" :src="'../storage/images/' + product.image_path + '/' + product.image_name" alt="product image">
-          <img v-if="product.image_name !== undefined && product.image_name == null" :src="'../storage/images/' + productDefaultImage.image_path + '/' + productDefaultImage.image_name" alt="product image">
+          <img v-if="product.image_name !== undefined && product.image_name != null && colorClicked.image_name == null" :src="'../storage/images/' + product.image_path + '/' + product.image_name" alt="product image">
+          <img v-if="colorClicked.image_name != null" :src="'../storage/images/' + colorClicked.image_path + '/' + colorClicked.image_name" alt="product image">
+          <img v-if="product.image_name !== undefined && product.image_name == null && colorClicked.image_name == null" :src="'../storage/images/' + productDefaultImage.image_path + '/' + productDefaultImage.image_name" alt="product image">
         </div>
         <!-- product prices with sales and original costs -->
         <product-price
-        v-bind:product="product">
+        v-bind:product="product"
+        v-bind:color-clicked="colorClicked">
         </product-price>
 
         <!-- select a size for product -->
-        <product-size>
+        <product-size
+        v-bind:product-groups-size="productGroupsSize"
+        v-bind:color-clicked="colorClicked">
         </product-size>
         <!-- the available colors for the size selected -->
-        <product-colors>
+        <product-colors
+        v-bind:size="size"
+        v-bind:product-id="product.id">
         </product-colors>
       </div>
       <div class="product-add-wrapper">
@@ -52,11 +58,22 @@ data(){
   return{
     product: [],
     productGroups: [],
+    productGroupsSize: [],
     productDefaultImage: [],
     categoryInfo: [],
     show: false,
+    size: '',
+    colorClicked: {},
   }
 },
+  created(){
+    this.$root.$on('size', (value) => {
+      this.size = value;
+    }),
+    this.$root.$on('colorClicked', (value) => {
+      this.colorClicked = value;
+    })
+  },
   mounted(){
     // delay method for page loader activity
     setTimeout(() => {
@@ -85,6 +102,7 @@ data(){
                console.log(res.data);
                 self.product = res.data.product[0];
                 self.productGroups = res.data.product_styles;
+                self.productGroupsSize = res.data.product_styles_size;
                 self.productDefaultImage = res.data.product_default_image[0];
                 self.productVis = true;
 
