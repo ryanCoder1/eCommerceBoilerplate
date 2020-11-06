@@ -4,6 +4,7 @@
 .product-page-container {
 
   @include product-overall-grid();
+  @include product-overall-style($infoBgColor: $white, $infoBdColor: transparent);
 
   .product-info-wrapper {
     @include info-wrapper-grid();

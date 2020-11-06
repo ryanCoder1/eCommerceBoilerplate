@@ -177,6 +177,24 @@ public function showGroupColor(Request $request)
       return response()->json(['success' => true, 'product_styles_color' => $styles]);
 
 }
+/**
+* Display the specified resource.
+*
+* @param  \App\Clientside\ProductsController
+* @return \Illuminate\Http\Response
+*/
+public function showProductDimensions(Request $request)
+{
+
+     $dimensions = DB::table('product_dimensions')
+                    ->select('product_dimensions.*')
+                    ->orderBy('order_number')
+                    ->get();
+
+
+      return response()->json(['success' => true, 'dimensions' => $dimensions]);
+
+}
 
   /**
  * Display the specified resource.

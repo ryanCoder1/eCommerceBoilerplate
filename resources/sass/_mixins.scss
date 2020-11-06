@@ -2107,28 +2107,53 @@ PRODUCT PAGE
     align-content: start;
     grid-gap: 25px;
     grid-template-areas: "info  add"
-                          "choose  ."
-                          "details  .";
+                          "description .";
 
     .product-info-wrapper {
       grid-area: info;
+      max-width: 650px;
     }
     .product-add-wrapper {
       grid-area: add;
     }
-    .product-choose-wrapper {
-      grid-area: choose;
+    .product-description-wrapper {
+      grid-area: description;
+      max-width: 650px;
     }
-    .product-details-wrapper {
-      grid-area: details;
-    }
+
     @media only screen and (max-width: 768px){
       grid-template-columns: max-content;
       grid-gap: 25px;
       grid-template-areas:  "info"
-                            "choose"
                             "add"
-                            "details";
+                            "description";
+    }
+ }
+ @mixin product-overall-style($infoBgColor, $infoBdColor){
+  //  full product page overall style
+
+
+    .product-info-wrapper {
+      background-color: $infoBgColor;
+      // box-shadow:   0 2.8px 2.2px rgba(0, 0, 0, 0.015),
+      //               0 6.7px 5.3px rgba(0, 0, 0, 0.035),
+      //               0 12.5px 10px rgba(0, 0, 0, 0.06),
+      //               0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+      //               0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+      //               0 100px 80px rgba(0, 0, 0, 0.12);
+      padding: 20px 0 10px 0;
+      border: solid 2px $infoBdColor;
+      min-height: 400px;
+    }
+    .product-add-wrapper {
+
+    }
+    .product-description-wrapper {
+      padding: 10px 20px;
+    }
+
+    @media only screen and (max-width: 768px){
+
     }
  }
  @mixin info-wrapper-grid(){
@@ -2159,6 +2184,7 @@ PRODUCT PAGE
     .info-colors {
       grid-area: colors;
     }
+
     @media only screen and (max-width: 768px){
       grid-template-columns: max-content;
       grid-gap: 25px;
@@ -2196,6 +2222,16 @@ PRODUCT PAGE
   .info-image img {
     width: 100%;
   }
+  .show-image {
+    @include opacity(0);
+    @include animation(productFadeImg, .5s, linear, 0s, forwards);
+  }
+  @keyframes productFadeImg {
+    100%{
+      @include opacity(1);
+    }
+  }
+
   .info-price-original {
     color: $priceColor;
     font-size: 18px;

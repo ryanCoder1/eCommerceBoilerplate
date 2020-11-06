@@ -44,6 +44,7 @@
                   <li><router-link :to="{ path: '/dashboard/productsedit' }"><a  v-on:click="closeMenuContainer()">Product edit / view</a></router-link></li>
                   <li><router-link :to="{ path: '/dashboard/productdefaultimage' }"><a  v-on:click="closeMenuContainer()">Product default image</a></router-link></li>
                   <li><router-link :to="{ path: '/dashboard/productsshowhomepage' }"><a  v-on:click="closeMenuContainer()">Products on home page</a></router-link></li>
+                  <li><router-link :to="{ path: '/dashboard/orderdimensions' }"><a  v-on:click="closeMenuContainer()">Order Dimensions</a></router-link></li>
                 </ul>
 
             </li>

@@ -25,9 +25,10 @@ import DashboardViewOrders from './components/adminDashboard/vieworders.vue';
 import DashboardViewPayments from './components/adminDashboard/viewpayments.vue';
 import DashboardDashboardUsers from './components/adminDashboard/dashboardusers.vue';
 import DashboardDashboardLogout from './components/adminDashboard/dashboardlogout.vue';
-import PhoneNumberInfo from './components/adminDashboard/phonenumberinfo.vue';
-import EmailAddressInfo from './components/adminDashboard/emailaddressinfo.vue';
-import SocialMediaInfo from './components/adminDashboard/socialmediainfo.vue';
+import DashboardOrderDimensions from './components/adminDashboard/orderdimensions.vue';
+import DashboardPhoneNumberInfo from './components/adminDashboard/phonenumberinfo.vue';
+import DashboardEmailAddressInfo from './components/adminDashboard/emailaddressinfo.vue';
+import DashboardSocialMediaInfo from './components/adminDashboard/socialmediainfo.vue';
 import AdminLogin from './components/adminAuth/login.vue';
 import AdminLogout from './components/adminAuth/logout.vue';
 import AdminCreateAccount from './components/adminAuth/admincreateaccount.vue';
@@ -171,12 +172,19 @@ component: Admin,
    },
    children: [
      { path: '/dashboard/phonenumberinfo',
-     component: PhoneNumberInfo,
-      name: 'PhoneNumberInfo',
+     component: DashboardPhoneNumberInfo,
+      name: 'DashboardPhoneNumberInfo',
       meta: {
            requiresAdminAuth: true
       }
     },
+    { path: '/dashboard/orderdimensions',
+    component: DashboardOrderDimensions,
+     name: 'DashboardOrderDimensions',
+     meta: {
+          requiresAdminAuth: true
+     }
+   },
      { path: '/dashboard/banner',
      component: DashboardBanner,
       name: 'DashboardBanner',
@@ -192,14 +200,14 @@ component: Admin,
      }
    },
     { path: '/dashboard/emailaddressinfo',
-     component: EmailAddressInfo,
-      name: 'EmailAddressInfo',
+     component: DashboardEmailAddressInfo,
+      name: 'DashboardEmailAddressInfo',
       meta: {
            requiresAdminAuth: true
       }
     }, { path: '/dashboard/socialmediainfo',
-     component: SocialMediaInfo,
-      name: 'SocialMediaInfo',
+     component: DashboardSocialMediaInfo,
+      name: 'DashboardSocialMediaInfo',
       meta: {
            requiresAdminAuth: true
       }

@@ -8625,23 +8625,21 @@ PRODUCTS LIST
   justify-content: space-around;
   align-content: start;
   grid-gap: 25px;
-  grid-template-areas: "info  add" "choose  ." "details  .";
+  grid-template-areas: "info  add" "description .";
 }
 
 .product-page-container .product-info-wrapper {
   grid-area: info;
+  max-width: 650px;
 }
 
 .product-page-container .product-add-wrapper {
   grid-area: add;
 }
 
-.product-page-container .product-choose-wrapper {
-  grid-area: choose;
-}
-
-.product-page-container .product-details-wrapper {
-  grid-area: details;
+.product-page-container .product-description-wrapper {
+  grid-area: description;
+  max-width: 650px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -8649,8 +8647,19 @@ PRODUCTS LIST
     grid-template-columns: -webkit-max-content;
     grid-template-columns: max-content;
     grid-gap: 25px;
-    grid-template-areas: "info" "choose" "add" "details";
+    grid-template-areas: "info" "add" "description";
   }
+}
+
+.product-page-container .product-info-wrapper {
+  background-color: #FFFFFF;
+  padding: 20px 0 10px 0;
+  border: solid 2px transparent;
+  min-height: 400px;
+}
+
+.product-page-container .product-description-wrapper {
+  padding: 10px 20px;
 }
 
 .product-page-container .product-info-wrapper {
@@ -8711,6 +8720,33 @@ PRODUCTS LIST
 
 .product-page-container .product-info-wrapper .info-image img {
   width: 100%;
+}
+
+.product-page-container .product-info-wrapper .show-image {
+  opacity: 0;
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  animation: productFadeImg 0.5s linear 0s forwards;
+  -webkit-animation: productFadeImg 0.5s linear 0s forwards;
+  -moz-animation: productFadeImg 0.5s linear 0s forwards;
+  -o-animation: productFadeImg 0.5s linear 0s forwards;
+  -ms-animation: productFadeImg 0.5s linear 0s forwards;
+}
+
+@-webkit-keyframes productFadeImg {
+  100% {
+    opacity: 1;
+    -khtml-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+
+@keyframes productFadeImg {
+  100% {
+    opacity: 1;
+    -khtml-opacity: 1;
+    -moz-opacity: 1;
+  }
 }
 
 .product-page-container .product-info-wrapper .info-price-original {
