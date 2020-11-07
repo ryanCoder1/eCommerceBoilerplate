@@ -52,6 +52,7 @@ Route::group([ 'middleware' => 'CheckDashboardToken'],function () {
     Route::post('/productsretrieve', 'Admin\ProductsController@showProducts');
     Route::post('/dimensionsretrieve', 'Admin\ProductsController@showDimensions');
     Route::post('/dimensionsorderupdate', 'Admin\ProductsController@dimensionsOrderUpdate');
+    Route::post('/dimensionsdelete', 'Admin\ProductsController@dimensionsDestroy');
     Route::post('/productgroups', 'Admin\ProductsController@storeProductGroups');
     Route::post('/productcategorystore', 'Admin\ProductsController@storeProductCategory');
     Route::post('/productimagestore', 'Admin\ProductsController@storeProductImages');

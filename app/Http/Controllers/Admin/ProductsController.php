@@ -1020,6 +1020,23 @@ public static function showProductEdit(Request $request)
       }
   }
 
+
+
+
+  public function dimensionsDestroy(Request $request){
+
+      // loop thru dimension array and delete all dimensions with
+      // key (delete) == true
+      for($i = 0; $i < $request->input('count'); $i++){
+
+        if($request->input('dimension_delete'. $i) == "true"){
+             DB::table('product_dimensions')->where('dimension', $request->input('dimension'. $i))->delete();
+        }
+      }
+
+      return response()->json(['success' => true]);
+
+}
       public function error500Email($error){
 
         Mail::to(EMAIL_ERRORS_TO)->send(new ErrorsEmail($error));
