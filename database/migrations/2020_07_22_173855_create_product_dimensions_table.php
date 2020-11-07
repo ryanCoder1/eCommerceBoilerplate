@@ -16,6 +16,7 @@ class CreateProductDimensionsTable extends Migration
         Schema::create('product_dimensions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('dimension');
+            $table->integer('order_number')->default(0);
             $table->timestamps();
         });
     }

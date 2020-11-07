@@ -1,5 +1,5 @@
 <template>
-        <div class="side-bar-menu-container" v-bind:style="{ minHeight: sideBarHeight + 250 + 'px' }">
+        <div class="side-bar-menu-container" v-bind:style="{ minHeight: sideBarHeight + 700 + 'px' }">
           <div class="side-bar-head-container">
             <span class="side-bar-close" v-on:click="closeMenuContainer()">
               <i class="fa fa-angle-left"></i>

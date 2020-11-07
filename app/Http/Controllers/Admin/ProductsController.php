@@ -135,37 +135,58 @@ public static function showProductEdit(Request $request)
           // if the $product_images array is 0, send through without a storage file check.
             return response()->json(['success' => true, 'product' => $product, 'product_styles' => $product_styles, 'product_images' => $product_images, 'product_default_image' => $product_default_image]);
         }
-}
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function showImagesCount(Request $request)
-  {
+      }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function showImagesCount(Request $request)
+    {
 
-    $imagesCount = DB::table('product_images')
-                    ->select('product_images.*')
-                    ->where('product_id', '=', $request->input('product_id'))
-                    ->count();
+      $imagesCount = DB::table('product_images')
+                      ->select('product_images.*')
+                      ->where('product_id', '=', $request->input('product_id'))
+                      ->count();
 
-            return response()->json(['images' => $imagesCount]);
-  }
-  /**
- * Display the specified resource.
- *
- * @param  \App\ProductsController
- * @return \Illuminate\Http\Response
- */
-public static function showDimensions(Request $request)
-{
-    $dimensions = DB::table('product_dimensions')
-                    ->select('product_dimensions.*')
-                    ->get();
+              return response()->json(['images' => $imagesCount]);
+    }
+      /**
+     * Display the specified resource.
+     *
+     * @param  \App\ProductsController
+     * @return \Illuminate\Http\Response
+     */
+    public function dimensionsOrderUpdate(Request $request)
+    {
 
-    return response()->json(['dimensions' => $dimensions]);
-}
+
+    //  run loop of dimensions array to update each order_number
+      for($i = 0; $i < $request->input('count'); $i++){
+        $updated = DB::table('product_dimensions')
+                        ->where('dimension', $request->input('dimension'. $i))
+                        ->update(['order_number' => $request->input('order_number'. $i)]);
+          }
+
+       return response()->json(['success' => true]);
+    }
+
+    /**
+    * Display the specified resource.
+    *
+    * @param  \App\ProductsController
+    * @return \Illuminate\Http\Response
+    */
+    public static function showDimensions(Request $request)
+    {
+      $dimensions = DB::table('product_dimensions')
+                      ->select('product_dimensions.*')
+                      ->orderBy('order_number')
+                      ->get();
+
+      return response()->json(['dimensions' => $dimensions]);
+    }
       /**
        * Show the form for creating a new resource.
        *
