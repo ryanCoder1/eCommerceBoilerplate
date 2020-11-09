@@ -19732,6 +19732,24 @@ body {
   box-sizing: border-box;
 }
 
+.success-msg {
+  text-align: center;
+  padding: 5px 10px;
+  margin: 10px 20px 10px 20px;
+  background-color: #97e398;
+  border: solid thin #519051;
+  color: #464646;
+}
+
+.error-msg {
+  text-align: center;
+  padding: 5px 10px;
+  margin: 10px 0 10px 20px;
+  background-color: #df8a81;
+  border: solid thin #bb554a;
+  color: #464646;
+}
+
 .formWrapper {
   width: 100%;
   height: 100%;

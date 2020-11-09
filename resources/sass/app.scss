@@ -45,7 +45,23 @@ body {
 * {
   box-sizing: border-box;
 }
-
+// Messages for errors / success
+.success-msg {
+  text-align: center;
+  padding: 5px 10px;
+  margin: 10px 20px 10px 20px;
+  background-color: rgb(151, 227, 152);
+  border: solid thin rgb(81, 144, 81);
+  color: #464646;
+}
+.error-msg {
+  text-align: center;
+  padding: 5px 10px;
+  margin: 10px 0 10px 20px;
+  background-color: rgb(223, 138, 129);
+  border: solid thin rgb(187, 85, 74);
+  color: #464646;
+}
 // FORMS STYLE
 
 // the blue semitransparent background container

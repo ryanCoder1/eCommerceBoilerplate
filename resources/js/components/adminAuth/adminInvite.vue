@@ -54,7 +54,9 @@
                        </p>
                        </div>
                      </label>
-                       <small class="bg-danger text-light p-1" v-if="errors != ''">{{ errors }} </small>
+                     <!-- Error/Success messages from api -->
+                     <p class="error-msg" v-if="errors != null">{{ errors }}</p>
+
 
                      <p class="admin-invite-btn" v-on:click="sendAdminInvite()">
                        <input type="button" value="Send Dashboard Invite" v-if="!loading"/>

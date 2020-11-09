@@ -507,7 +507,31 @@ public static function showProductEdit(Request $request)
               return  response()->json(['in_db' => true]);
           }
       }
+      /**
+       * Store a newly created resource in storage.
+       *
+       * @param  \Illuminate\Http\Request  $request
+       * @return \Illuminate\Http\Response
+       */
+      public function storeDimension(Request $request)
+      {
 
+            $id = DB::table('product_dimensions')->insertGetId(
+                      [
+                       'dimension' => $request->input('dimension'),
+                       'created_at' => Carbon::now(),
+                     ]
+                  );
+
+
+          if($id){
+                return  response()->json(['success' => true]);
+            }else{
+                // 500 error for store dimension in method dimensionStore
+                return $this->error500Email('store dimension in method dimensionStore');
+            }
+
+      }
       /**
        * Show the form for editing the specified resource.
        *

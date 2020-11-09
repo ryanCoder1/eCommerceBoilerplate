@@ -15,12 +15,13 @@
                       <td>{{ dimension.dimension }}</td>
                     </tr>
                   </table>
-                     <!-- Error/Success messages from api -->
-                     <p class="bg-danger text-light p-2 ml-4 d-inline" v-if="errors != null">{{ errors }}</p>
-                     <p class="bg-success text-light p-2 my-2 ml-4 d-inline" v-if="success != null">{{ success }}</p>
+                  <!-- Error/Success messages from api -->
+                  <p class="error-msg" v-if="errors != null">{{ errors }}</p>
+                  <p class="success-msg" v-if="success != null">{{ success }}</p>
+
 
                      <div class="dashboard-page-btn" v-if="showSave" v-on:click="saveDimensions()">
-                       <input type="button"   value="Save Order" v-if="!loading"/>
+                       <input type="button"   value="Delete" v-if="!loading"/>
                        <load-dots
                         v-if="loading"
                         v-bind:loading-dots="loadingDots"
@@ -126,6 +127,7 @@ export default {
                if(res.data.success){
                   self.dimensionsDelete = [];
                   self.$refs['dimension' + 0][0].checked = false;
+                  self.showSave = false;
                   self.loading = false;
                   self.success = 'Dimensions were deleted successfully!';
                   self.getDimensions();

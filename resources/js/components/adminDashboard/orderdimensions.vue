@@ -1,6 +1,11 @@
 <template>
       <div id="dashboardOrderContainer" class="dashboard-page-containers">
          <h3>Order dimensions</h3>
+          <h4 class="order-btn text-secondary" v-on:click="toggleAdd()">
+             Add Dimensions
+             <span class="order-span" v-if="addVis">-</span>
+             <span class="order-span" v-if="!addVis">+</span>
+          </h4>
           <h4 class="order-btn text-secondary" v-on:click="toggleOrder()">
             Order Dimensions
             <span class="order-span" v-if="orderVis">-</span>
@@ -11,6 +16,10 @@
             <span class="order-span" v-if="deleteVis">-</span>
             <span class="order-span" v-if="!deleteVis">+</span>
           </h4>
+          <!-- add dimensions component -->
+          <add
+            v-if="addVis">
+          </add>
           <!-- order dimensions component -->
           <order
             v-if="orderVis">
@@ -28,6 +37,7 @@
 
 import Order from './ordercomponent.vue';
 import DeleteDimensions from './deletedimensionscomponent.vue';
+import AddDimensions from './adddimensionscomponent.vue';
 import LoadDots from '../pages/loaddots.vue';
 import { errorHandle } from '../../helper/errors';
 
@@ -36,12 +46,14 @@ export default {
       'load-dots': LoadDots,
       'order': Order,
       'delete': DeleteDimensions,
+      'add': AddDimensions,
     },
 
     data(){
       return{
         orderVis: false,
         deleteVis: false,
+        addVis: false,
       }
 
   },
@@ -70,6 +82,9 @@ export default {
     },
     toggleDelete: function(){
       this.deleteVis = !this.deleteVis;
+    },
+    toggleAdd: function(){
+      this.addVis = !this.addVis;
     },
 
   }

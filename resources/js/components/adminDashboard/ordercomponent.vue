@@ -22,12 +22,13 @@
                       <td>{{ dimensionName.dimension }}</td>
                     </tr>
                   </table>
-                     <!-- Error/Success messages from api -->
-                     <p class="bg-danger text-light p-2 ml-4 d-inline" v-if="errors != null">{{ errors }}</p>
-                     <p class="bg-success text-light p-2 my-2 ml-4 d-inline" v-if="success != null">{{ success }}</p>
+                  <!-- Error/Success messages from api -->
+                  <p class="error-msg" v-if="errors != null">{{ errors }}</p>
+                  <p class="success-msg" v-if="success != null">{{ success }}</p>
+
 
                      <div class="dashboard-page-btn" v-if="showSave" v-on:click="saveDimensions()">
-                       <input type="button"   value="Save Order" v-if="!loading"/>
+                       <input type="button"   value="Save" v-if="!loading"/>
                        <load-dots
                         v-if="loading"
                         v-bind:loading-dots="loadingDots"
@@ -123,6 +124,7 @@ export default {
                if(res.data.success){
                   self.dimensionsNum = [];
                   self.loading = false;
+                  self.showSave = false;
                   self.success = 'Dimensions order was saved successfully!';
                   self.getDimensions();
              }
@@ -162,6 +164,9 @@ export default {
 
 </script>
 <style>
+.dashboard-order-table {
+    margin-bottom: 30px;
+}
   .dashboard-order-table th {
     padding: 15px 0 0 0;
     font-size: 23px;

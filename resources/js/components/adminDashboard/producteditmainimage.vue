@@ -24,9 +24,10 @@
                    </div>
 
 
-                     <!-- Error/Success messages from api -->
-                     <p class="bg-danger text-light p-2 ml-4 d-inline" v-if="errors != null">{{ errors }}</p>
-                     <p class="bg-success text-light p-2 my-2 ml-4 d-inline" v-if="success != null">{{ success }}</p>
+                   <!-- Error/Success messages from api -->
+                   <p class="error-msg" v-if="errors != null">{{ errors }}</p>
+                   <p class="success-msg" v-if="success != null">{{ success }}</p>
+
 
                     <div class="dashboard-edit-btn" v-on:click="saveImage()">
                       <input type="button"   value="Save Image" v-if="!loading"/>

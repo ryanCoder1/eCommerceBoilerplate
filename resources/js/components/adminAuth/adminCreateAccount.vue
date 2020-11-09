@@ -58,8 +58,10 @@
                         </p>
                       </div>
                       </label>
-                      <p class="bg-light text-danger p-1" v-if="errors != null">{{ errors }}</p>
-                      <p class="bg-light text-danger p-1" v-if="errorEmail">Email already exists. <br/>
+                      <!-- Error/Success messages from api -->
+                      <p class="error-msg" v-if="errors != null">{{ errors }}</p>
+                      <p class="error-msg" v-if="errorEmail">Email already exists. <br/>
+
                         Try <router-link :to="{ name: 'DashboardLogin', path: '/dashboard/login' }"><a>Dashboard log in</a></router-link></p>
                      <p class="admin-create-btn" v-on:click="registerDashboard()">
                        <input type="button"   value="Create Dashboard Account" v-if="!loading"/>

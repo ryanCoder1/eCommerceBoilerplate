@@ -25,7 +25,9 @@
                         </p>
                       </div>
                       </label>
-                      <p class="bg-danger text-light p-1" v-if="errors != null">{{ errors }}</p>
+                      <!-- Error/Success messages from api -->
+                      <p class="error-msg" v-if="errors != null">{{ errors }}</p>
+
                      <br/>
                      <div class="admin-login-btn col-xs-12 col-sm-12 mx-auto" v-on:click="logInDashboard()">
                        <input type="button" value="Log in" v-if="!loading"/>
