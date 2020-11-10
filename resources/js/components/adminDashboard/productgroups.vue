@@ -32,20 +32,11 @@
                            <select class="form-control formInput" name="state" v-on:change="clearErrors()" v-model="form.dimension_name">
                            <option value="" disabled>Choose dimension</option>
                            <option :value="dimension.dimension" v-for="(dimension, index) in dimensions">{{ dimension.dimension }}</option>
-                        </select>
-                       <span class="labelStyle">Dimensions (if necessary)</span>
-                      </p>
-                      </div>
-                    </label>
-                     <label class="col-xs-12 col-sm-12">
-                     <div class="inputContainer">
-                       <p>
-                         <input class="form-control" v-bind:class="{formInput: isActive}"  type="text"  v-model="form.dimension"/>
-                         <span class="labelStyle" >Dimensions (This field will save for future dimension options) (if necessary)</span>
-                       </p>
-                     </div>
-                     </label>
-
+                          </select>
+                         <span class="labelStyle">Dimensions (if necessary)</span>
+                        </p>
+                        </div>
+                      </label>
                      <label class="col-xs-12 col-sm-12">
                      <div class="inputContainer">
                        <p>
@@ -125,7 +116,6 @@ export default {
         form: {
           product_id: null,
           color: null,
-          dimension: null,
           dimension_name: null,
           in_stock: null,
           price: null,
@@ -195,7 +185,7 @@ export default {
               this.errors = 'A product must be chosen for product group.';
               return false;
         }
-        else if(this.$data.form.product_id != null && this.$data.form.size == null && this.$data.form.dimension == null && this.$data.form.dimension_name == null && this.$data.form.price == null && this.$data.form.sale_price == null && this.$data.form.in_stock == null){
+        else if(this.$data.form.product_id != null && this.$data.form.size == null && this.$data.form.dimension_name == null && this.$data.form.price == null && this.$data.form.sale_price == null && this.$data.form.in_stock == null){
               this.errors = 'Can not send through an empty product group.';
               return false;
         }
@@ -235,7 +225,6 @@ export default {
     refreshFields: function(){
       this.$data.form.product_id = null;
       this.$data.form.color = null;
-      this.$data.form.dimension = null;
       this.$data.form.dimension_name = null;
       this.$data.form.in_stock = null;
       this.$data.form.price = null;
@@ -258,7 +247,6 @@ export default {
               fd.append('file',this.image_file)
               fd.append('product_id',this.$data.form.product_id)
               fd.append('color',this.$data.form.color)
-              fd.append('dimension',this.$data.form.dimension)
               fd.append('dimension_name',this.$data.form.dimension_name)
               fd.append('in_stock',this.$data.form.in_stock)
               fd.append('price',this.$data.form.price)

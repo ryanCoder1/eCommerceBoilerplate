@@ -148,13 +148,13 @@
   grid-template-columns: 1fr 1fr;
   justify-content: space-around;
   align-content: center;
-  grid-column-gap: 40px;
+  grid-column-gap: 65px;
 }
 .grid-one {
   grid-template-areas: "imageOne infoOne";
 }
 .grid-two {
-  grid-template-areas: "infoTwo imageTwo"
+  grid-template-areas: "infoTwo imageTwo";
 }
 .banner-client-ul-one {
   grid-area: imageOne;
@@ -164,6 +164,7 @@
   margin: 0;
   position: relative;
   z-index: 10;
+  object-fit: cover;
   list-style: none;
   transform: translateX(-400px);
   opacity: 0;
@@ -186,6 +187,7 @@
   margin: 0;
   position: relative;
   z-index: 10;
+  object-fit: cover;
   list-style: none;
   transform: translateX(400px);
   opacity: 0;
@@ -302,13 +304,169 @@
     background-color: #2ec153;
     position: relative;
     top: -375px;
-    left: 50px;
+    left: -50px;
     z-index: -1;
     border: solid 3px #FFFFFF;
 
 }
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1090px){
 
+  .grid-one, .grid-two {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-content: center;
+    grid-column-gap: 0px;
+    grid-row-gap: 20px;
+  }
+  .grid-one {
+    grid-template-areas: "infoOne"
+                         "imageOne";
+  }
+  .grid-two {
+    grid-template-areas: "infoTwo"
+                         "imageTwo";
+  }
+  .banner-client-ul-one {
+    grid-area: imageOne;
+    width: 100%;
+    max-width: 500px;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    list-style: none;
+    transform: translateX(-400px);
+    opacity: 0;
+  }
 
+  .banner-client-ul-two {
+    grid-area: imageTwo;
+    width: 100%;
+    max-width: 500px;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    list-style: none;
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  .banner-client-info-one {
+    grid-area: infoOne;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    top: 0px;
+    white-space: normal;
+    line-height: normal;
+    text-align: center;
+    padding: 10px;
+    transform: translateY(-50px);
+    opacity: 0;
+    }
+
+  .banner-client-info-two {
+    grid-area: infoTwo;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    white-space: normal;
+    line-height: normal;
+    text-align: center;
+    padding: 10px 20px;
+    opacity: 0;
+    }
+}
+@media only screen and (max-width: 635px){
+
+  .banner-client-ul-one {
+    grid-area: imageOne;
+    width: 100%;
+    max-width: 280px;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    list-style: none;
+  }
+
+  .banner-client-ul-two {
+    grid-area: imageTwo;
+    width: 100%;
+    max-width: 280px;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    list-style: none;
+  }
+  .banner-client-image {
+    width: auto;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .banner-client-info-one {
+    grid-area: infoOne;
+    max-width: 500px;
+    width: 95%;
+    margin: 0 auto;
+    position: relative;
+    top: 0px;
+    white-space: normal;
+    line-height: normal;
+    text-align: center;
+    padding: 10px 20px;
+    transform: translateY(-50px);
+    opacity: 0;
+    }
+
+  .banner-client-info-two {
+    grid-area: infoTwo;
+    max-width: 500px;
+    width: 95%;
+    margin: 0 auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    white-space: normal;
+    line-height: normal;
+    text-align: center;
+    padding: 10px 20px;
+    opacity: 0;
+    }
+    .banner-background-one {
+        width: 250px;
+        height: 250px;
+        margin: 0;
+        padding: 0;
+        display: block;
+        background-color: #213B50;
+        position: relative;
+        top: -225px;
+        left: 66px;
+        z-index: -1;
+        border: solid 3px #FFFFFF;
+
+    }
+    .banner-background-two {
+        width: 250px;
+        height: 250px;
+        margin: 0;
+        padding: 0;
+        display: block;
+        background-color: #2ec153;
+        position: relative;
+        top: -225px;
+        left: -18px;
+        z-index: -1;
+        border: solid 3px #FFFFFF;
+
+    }
 }
 </style>

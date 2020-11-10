@@ -61,6 +61,7 @@ export default {
 
      // call method to alert sidemenu that the current page is in a sub menu.
      this.pageOpen();
+
      setTimeout(() => {
        this.templateHeight();
      },500);

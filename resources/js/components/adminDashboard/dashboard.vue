@@ -2,9 +2,8 @@
         <div id="dashboardContainer">
           <side-bar-menu
             v-bind:side-bar-height="sideBarHeight"
-            v-bind:sub-menu="subMenu"
-
-          ></side-bar-menu>
+            v-bind:sub-menu="subMenu">
+          </side-bar-menu>
           <top-bar-menu
             v-bind:current-admin="currentAdmin"
           ></top-bar-menu>
@@ -15,9 +14,11 @@
 
 
 <script>
+
 import SideBarMenu from './sidebarmenu.vue';
 import TopBarMenu from './topbarmenu.vue';
 import { errorHandle } from '../../helper/errors';
+
 export default {
     components: {
       'side-bar-menu': SideBarMenu,
@@ -26,7 +27,7 @@ export default {
 
     data(){
       return{
-        sideBarHeight: null,
+        sideBarHeight: 500,
         subMenu: null,
         currentAdmin: {},
       }
@@ -48,6 +49,7 @@ export default {
     }),
     this.$root.$on('subMenu', (value) =>{
        this.subMenu = value;
+
     }),
     this.$root.$on('showMenuContainer', (value) =>{
        this.showMenuContainer();

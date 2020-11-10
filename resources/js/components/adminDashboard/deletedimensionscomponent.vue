@@ -76,6 +76,8 @@ export default {
       this.$root.$emit('sideBarHeight', elem);
     },
     addDimensionDelete: function(index, id){
+      this.errors = null;
+      this.success = null;
       // the product is checked(index)
          if(this.$refs['dimension' + index][0].checked){
               this.dimensionsDelete[index].delete = true;

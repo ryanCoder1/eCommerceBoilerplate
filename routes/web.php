@@ -50,10 +50,10 @@ Route::group([ 'middleware' => 'CheckDashboardToken'],function () {
     Route::post('/productcategorycaptionshow',  'Admin\ProductsController@showCategoryCaption');
     Route::post('/productcategoryedit',  'Admin\ProductsController@editCategory');
     Route::post('/productsretrieve', 'Admin\ProductsController@showProducts');
-    Route::post('/dimensionsretrieve', 'Admin\ProductsController@showDimensions');
-    Route::post('/dimensionsorderupdate', 'Admin\ProductsController@dimensionsOrderUpdate');
-    Route::post('/dimensionsdelete', 'Admin\ProductsController@dimensionsDestroy');
-    Route::post('/dimensionstore', 'Admin\ProductsController@storeDimension');
+    Route::post('/dimensionsretrieve', 'Admin\DimensionsController@showDimensions');
+    Route::post('/dimensionsorderupdate', 'Admin\DimensionsController@dimensionsOrderUpdate');
+    Route::post('/dimensionsdelete', 'Admin\DimensionsController@dimensionsDestroy');
+    Route::post('/dimensionstore', 'Admin\DimensionsController@storeDimension');
     Route::post('/productgroups', 'Admin\ProductsController@storeProductGroups');
     Route::post('/productcategorystore', 'Admin\ProductsController@storeProductCategory');
     Route::post('/productimagestore', 'Admin\ProductsController@storeProductImages');

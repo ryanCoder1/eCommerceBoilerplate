@@ -43,8 +43,8 @@
                   <li><router-link :to="{ path: '/dashboard/productimages' }"><a  v-on:click="closeMenuContainer()">Product images</a></router-link></li>
                   <li><router-link :to="{ path: '/dashboard/productsedit' }"><a  v-on:click="closeMenuContainer()">Product edit / view</a></router-link></li>
                   <li><router-link :to="{ path: '/dashboard/productdefaultimage' }"><a  v-on:click="closeMenuContainer()">Product default image</a></router-link></li>
-                  <li><router-link :to="{ path: '/dashboard/productsshowhomepage' }"><a  v-on:click="closeMenuContainer()">Products on home page</a></router-link></li>
-                  <li><router-link :to="{ path: '/dashboard/orderdimensions' }"><a  v-on:click="closeMenuContainer()">Order / Delete Dimensions</a></router-link></li>
+                  <li><router-link :to="{ path: '/dashboard/productsshowhomepage' }"><a  v-on:click="closeMenuContainer()">Show Product on home page</a></router-link></li>
+                  <li><router-link :to="{ path: '/dashboard/orderdimensions' }"><a  v-on:click="closeMenuContainer()">Product Dimensions</a></router-link></li>
                 </ul>
 
             </li>
@@ -116,9 +116,8 @@ export default {
   mounted(){
     let self = this;
     setTimeout(function(){
-      console.log('mounted ' + self.$props.subMenu);
         self.dropMenu(null, self.$props.subMenu);
-    },500);
+    },1000);
 
   },
   methods: {
@@ -126,7 +125,9 @@ export default {
       this.$root.$emit('closeMenuContainer', true);
     },
     dropMenu: function(event, sub_menu){
-
+      // dropMenu is called two different ways
+      // in component with @param event, sub_menu = null
+      // out of component as @param event = null, sub_menu as prop.subMenu
       let menuLi;
       if(event != null){
         menuLi = event.path[0].innerText;
@@ -137,12 +138,13 @@ export default {
       let anchor = document.getElementsByTagName("a");
       let next_sibling = null;
       for(let i = 0; i < anchor.length; i++){
+        // text match of anchor == menuLi (Personal info / Categories / Products / Slides)
         if(anchor[i].outerText.match(menuLi)){
-          console.log(anchor[i]);
           next_sibling = anchor[i].nextElementSibling;
-          console.log(next_sibling);
+
         }
       }
+
       // // close all menus not using
       // method rotateArrowBack's parameter is the index in the list element array
         for(let i = 0; i < this.subMenuChoice.length; i++){
@@ -196,6 +198,7 @@ export default {
         break;
         case 'Products':
             this.showProducts = !this.showProducts;
+
                 if(this.showProducts){
                   this.rotateArrow(next_sibling, 180);
                 }else{

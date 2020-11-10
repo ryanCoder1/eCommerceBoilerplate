@@ -28,7 +28,7 @@
                        <label class="col-xs-12 col-sm-12">
                          <div class="inputContainer">
                            <p>
-                             <input class="form-control" v-bind:class="{formInput: isActive}"  type="text" v-on:keyup="showSaveHide()" v-model="dimension"/>
+                             <input class="form-control" type="text" v-on:keyup="showSaveHide()" v-model="dimension"/>
                              <span class="labelStyle" >Dimensions (This field will save for future dimension options) (if necessary)</span>
                            </p>
                          </div>

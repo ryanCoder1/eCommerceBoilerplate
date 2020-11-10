@@ -152,41 +152,7 @@ public static function showProductEdit(Request $request)
 
               return response()->json(['images' => $imagesCount]);
     }
-      /**
-     * Display the specified resource.
-     *
-     * @param  \App\ProductsController
-     * @return \Illuminate\Http\Response
-     */
-    public function dimensionsOrderUpdate(Request $request)
-    {
 
-
-    //  run loop of dimensions array to update each order_number
-      for($i = 0; $i < $request->input('count'); $i++){
-        $updated = DB::table('product_dimensions')
-                        ->where('dimension', $request->input('dimension'. $i))
-                        ->update(['order_number' => $request->input('order_number'. $i)]);
-          }
-
-       return response()->json(['success' => true]);
-    }
-
-    /**
-    * Display the specified resource.
-    *
-    * @param  \App\ProductsController
-    * @return \Illuminate\Http\Response
-    */
-    public static function showDimensions(Request $request)
-    {
-      $dimensions = DB::table('product_dimensions')
-                      ->select('product_dimensions.*')
-                      ->orderBy('order_number')
-                      ->get();
-
-      return response()->json(['dimensions' => $dimensions]);
-    }
       /**
        * Show the form for creating a new resource.
        *
@@ -348,8 +314,6 @@ public static function showProductEdit(Request $request)
       public function storeProductImages(Request $request)
       {
 
-
-
         $imagesCount = DB::table('product_images')
                         ->select('product_images.*')
                         ->where('product_id', '=', $request->input('product_id'))
@@ -407,31 +371,6 @@ public static function showProductEdit(Request $request)
        */
       public function storeProductGroups(Request $request)
       {
-          // form the dimension to go in db table
-          // dimension_name is from a chosen list
-          // dimension is new to add to product_dimensions table
-
-          $dimension = null;
-          if(!empty($request->input('dimension_name'))){
-            $dimension = $request->input('dimension_name');
-          }else {
-            $dimension = $request->input('dimension');
-            // check if dimension is in table
-            $result = DB::table('product_dimensions')
-                            ->select('product_dimensions.*')
-                            ->where('dimension', '=', $dimension)
-                            ->get();
-
-            if(count($result) < 1){
-              DB::table('product_dimensions')->insert(
-                      [
-                       'dimension' => $dimension,
-                       'created_at' => Carbon::now(),
-                     ]
-                  );
-                }
-            }
-
 
             // set variables to null if request file empty.
             $file = null;
@@ -453,7 +392,7 @@ public static function showProductEdit(Request $request)
                   [
                    'product_id' => $request->input('product_id'),
                    'color' => $request->input('color'),
-                   'dimension' => $dimension,
+                   'dimension' => $request->input('dimension_name'),
                    'price' => $request->input('price'),
                    'sale_price' => $request->input('sale_price'),
                    'in_stock' => $request->input('in_stock'),
@@ -507,31 +446,7 @@ public static function showProductEdit(Request $request)
               return  response()->json(['in_db' => true]);
           }
       }
-      /**
-       * Store a newly created resource in storage.
-       *
-       * @param  \Illuminate\Http\Request  $request
-       * @return \Illuminate\Http\Response
-       */
-      public function storeDimension(Request $request)
-      {
 
-            $id = DB::table('product_dimensions')->insertGetId(
-                      [
-                       'dimension' => $request->input('dimension'),
-                       'created_at' => Carbon::now(),
-                     ]
-                  );
-
-
-          if($id){
-                return  response()->json(['success' => true]);
-            }else{
-                // 500 error for store dimension in method dimensionStore
-                return $this->error500Email('store dimension in method dimensionStore');
-            }
-
-      }
       /**
        * Show the form for editing the specified resource.
        *
@@ -839,7 +754,15 @@ public static function showProductEdit(Request $request)
 }
 
 
-
+/**
+ * Edit image in Main image
+ *
+ * @param  String $fileMimeType
+ * @param  int $fileSize
+ * @param  int $productId
+ * @param  Array $files
+ * @return \Illuminate\Http\Response
+ */
  public function noImageInTableEditMain($fileMimeType, $fileSize, $productId, $files){
 
          // no default image in table
@@ -868,17 +791,7 @@ public static function showProductEdit(Request $request)
                   return $this->error500Email('Failed to update product main image, update problem. No main Image');
                }
  }
-      /**
-       * Update the specified resource in storage.
-       *
-       * @param  \Illuminate\Http\Request  $request
-       * @param  int  $id
-       * @return \Illuminate\Http\Response
-       */
-      public function update(Request $request, $id)
-      {
-          //
-      }
+
       /**
        * Remove the specified resource from storage.
        *
@@ -1043,24 +956,12 @@ public static function showProductEdit(Request $request)
         }
       }
   }
-
-
-
-
-  public function dimensionsDestroy(Request $request){
-
-      // loop thru dimension array and delete all dimensions with
-      // key (delete) == true
-      for($i = 0; $i < $request->input('count'); $i++){
-
-        if($request->input('dimension_delete'. $i) == "true"){
-             DB::table('product_dimensions')->where('dimension', $request->input('dimension'. $i))->delete();
-        }
-      }
-
-      return response()->json(['success' => true]);
-
-}
+    /**
+     * Cause 500 error and message thru email
+     *
+     * @param  $error Message sent thru email
+     * @return \Illuminate\Http\Response
+     */
       public function error500Email($error){
 
         Mail::to(EMAIL_ERRORS_TO)->send(new ErrorsEmail($error));
