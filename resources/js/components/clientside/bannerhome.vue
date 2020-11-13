@@ -146,7 +146,7 @@
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-content: space-around;
+  justify-content: center;
   align-content: center;
   grid-column-gap: 65px;
 }
@@ -161,13 +161,13 @@
   width: 100%;
   max-width: 500px;
   padding: 0;
-  margin: 0;
+  margin: 0 auto 0 auto;
   position: relative;
   z-index: 10;
-  object-fit: cover;
   list-style: none;
   transform: translateX(-400px);
   opacity: 0;
+
 }
 .banner-client-ul-one-move {
 
@@ -179,6 +179,34 @@
     opacity: 1;
   }
 }
+.banner-client-ul-one::before {
+    content: '';
+    width: 350px;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: #5fbb50;
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    z-index: -1;
+
+}
+.banner-client-ul-one::after {
+    content: '';
+    width: 200px;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: #3b7895;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    z-index: -1;
+
+}
 .banner-client-ul-two {
   grid-area: imageTwo;
   width: 100%;
@@ -187,7 +215,6 @@
   margin: 0;
   position: relative;
   z-index: 10;
-  object-fit: cover;
   list-style: none;
   transform: translateX(400px);
   opacity: 0;
@@ -201,6 +228,34 @@
     transform: translateX(0px);
     opacity: 1;
   }
+}
+.banner-client-ul-two::before {
+    content: '';
+    width: 350px;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: #5fbb50;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    z-index: -1;
+
+}
+.banner-client-ul-two::after {
+    content: '';
+    width: 200px;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: #3b7895;
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    z-index: -1;
+
 }
 .banner-client-ul-one li, .banner-client-ul-two li {
   position: relative;
@@ -219,7 +274,8 @@
   padding: 0;
   object-fit: cover;
   object-position: top;
-  border: solid 3px #FFFFFF;
+  /* border: solid 10px transparent;*/
+  box-shadow: 0 0 20px 4px rgba(255,255,255, .8);
   transition: .3s;
 }
 .banner-client-info-one {
@@ -230,8 +286,9 @@
   top: 150px;
   white-space: normal;
   line-height: normal;
-  text-align: center;
+  text-align: left;
   padding: 10px;
+  margin: 0 auto;
   transform: translateY(-50px);
   opacity: 0;
   }
@@ -254,7 +311,8 @@
   left: 50px;
   white-space: normal;
   line-height: normal;
-  text-align: center;
+  text-align: left;
+  margin: 0 auto;
   padding: 10px 20px;
   transform: translateY(-50px);
   opacity: 0;
@@ -271,7 +329,8 @@
   }
 .banner-client-title-one, .banner-client-title-two {
     color: #213B50;
-    font-size: 22px;
+    font-size: 30px;
+    text-transform: uppercase;
     padding: 0 0 10px 0;
     display: inline-block;
     border-bottom: solid thin rgb(228, 228, 228);
@@ -280,37 +339,18 @@
     color: rgb(138, 138, 138);
     font-size: 18px;
     padding: 10px 0 0 0;
+    line-height: 1.4em;
 }
-.banner-background-one {
-    width: 500px;
-    height: 400px;
-    margin: 0;
-    padding: 0;
-    display: block;
-    background-color: #213B50;
-    position: relative;
-    top: -375px;
-    left: 50px;
-    z-index: -1;
-    border: solid 3px #FFFFFF;
 
-}
-.banner-background-two {
-    width: 500px;
-    height: 400px;
-    margin: 0;
-    padding: 0;
-    display: block;
-    background-color: #2ec153;
-    position: relative;
-    top: -375px;
-    left: -50px;
-    z-index: -1;
-    border: solid 3px #FFFFFF;
 
-}
 @media only screen and (max-width: 1090px){
-
+  .banner-client-container {
+    width: 100%;
+    min-height: 700px;
+    position: relative;
+    padding: 150px 20px 100px 20px;
+    margin: 0;
+  }
   .grid-one, .grid-two {
     display: grid;
     grid-template-columns: 1fr;
@@ -440,32 +480,34 @@
     padding: 10px 20px;
     opacity: 0;
     }
-    .banner-background-one {
+    .banner-client-ul-one::before {
+        content: '';
         width: 250px;
         height: 250px;
         margin: 0;
         padding: 0;
         display: block;
-        background-color: #213B50;
-        position: relative;
-        top: -225px;
-        left: 66px;
+        background-color: #f0f0f0;
+        position: absolute;
+        top: 25px;
+        left: 25px;
         z-index: -1;
-        border: solid 3px #FFFFFF;
 
     }
-    .banner-background-two {
+
+
+    .banner-client-ul-two::before {
+        content: '';
         width: 250px;
         height: 250px;
         margin: 0;
         padding: 0;
         display: block;
-        background-color: #2ec153;
-        position: relative;
-        top: -225px;
-        left: -18px;
+        background-color: #f0f0f0;
+        position: absolute;
+        top: 25px;
+        left: -25px;
         z-index: -1;
-        border: solid 3px #FFFFFF;
 
     }
 }

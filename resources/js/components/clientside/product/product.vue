@@ -17,11 +17,18 @@
         v-bind:color-clicked="colorClicked">
         </product-price>
 
+        <!-- product prices with sales and original costs -->
+        <product-in-stock
+        v-bind:product="product"
+        v-bind:color-clicked="colorClicked">
+        </product-in-stock>
+
         <!-- select a size for product -->
         <product-size
         v-bind:product-groups-size="productGroupsSize"
         v-bind:color-clicked="colorClicked">
         </product-size>
+
         <!-- the available colors for the size selected -->
         <product-colors
         v-bind:size="size"
@@ -44,6 +51,7 @@
 
 <script>
 import ProductPrice from './productprice.vue';
+import ProductInStock from './productinstock.vue';
 import ProductColors from './productcolors.vue';
 import ProductSize from './productsize.vue';
 import ProductTitle from './producttitle.vue';
@@ -53,6 +61,7 @@ export default {
   components: {
     'product-colors': ProductColors,
     'product-price': ProductPrice,
+    'product-in-stock': ProductInStock,
     'product-size': ProductSize,
     'product-title': ProductTitle,
     'product-description': ProductDescription,
@@ -94,6 +103,10 @@ data(){
 
   },
   methods: {
+    addDimensionsInArray: function(){
+      this.productGroupsSize.push(this.product);
+      console.log(this.productGroupsSize);
+    },
     showProductInfo: function(){
         // for scope of this within axios
         let self = this;
@@ -108,9 +121,10 @@ data(){
                console.log(res.data);
                 self.product = res.data.product[0];
                 self.productGroups = res.data.product_styles;
-                // self.productGroupsSize = res.data.product_styles_size;
+                self.productGroupsSize = res.data.product_styles_size;
                 self.productDefaultImage = res.data.product_default_image[0];
                 self.productVis = true;
+                // self.addDimensionsInArray();
 
               }
 

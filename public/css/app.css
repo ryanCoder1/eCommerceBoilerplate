@@ -7810,7 +7810,7 @@ BROWSER FRIENDLY STYLES
 .category-shop-container .products-container .products-container {
   text-align: center;
   margin: 0;
-  padding: 25px 0 5px 0;
+  padding: 25px 0 50px 0;
   width: 100%;
 }
 
@@ -7974,7 +7974,7 @@ PRODUCTS LIST
 .home-page .products-container .products-container {
   text-align: center;
   margin: 0;
-  padding: 25px 0 5px 0;
+  padding: 25px 0 50px 0;
   width: 100%;
 }
 
@@ -8669,7 +8669,7 @@ PRODUCTS LIST
   justify-content: center;
   align-content: start;
   grid-column-gap: 25px;
-  grid-template-areas: "image title" "image price" "image size" "image colors";
+  grid-template-areas: "image title" "image price" "image inStock" "image size" "image colors";
 }
 
 .product-page-container .product-info-wrapper .info-title {
@@ -8682,6 +8682,10 @@ PRODUCTS LIST
 
 .product-page-container .product-info-wrapper .info-price {
   grid-area: price;
+}
+
+.product-page-container .product-info-wrapper .info-in-stock {
+  grid-area: inStock;
 }
 
 .product-page-container .product-info-wrapper .info-size {
@@ -8697,7 +8701,7 @@ PRODUCTS LIST
     grid-template-columns: -webkit-max-content;
     grid-template-columns: max-content;
     grid-gap: 25px;
-    grid-template-areas: "title" "ratings" "image" "price" "size" "colors";
+    grid-template-areas: "title" "ratings" "image" "price" "inStock" "size" "colors";
   }
 }
 
@@ -8775,6 +8779,10 @@ PRODUCTS LIST
   font-size: 22px !important;
   font-weight: bold !important;
   color: #213B50 !important;
+}
+
+.product-page-container .product-info-wrapper .size-option-display-none {
+  display: none;
 }
 
 .product-page-container .product-info-wrapper .info-colors {

@@ -1468,7 +1468,7 @@ USED FOR HOME PAGE & CATEGORY PAGE PRODUCTS
   .products-container {
     text-align: center;
     margin:  0;
-    padding: 25px 0 5px 0;
+    padding: 25px 0 50px 0;
     width: 100%;
   }
   // HEAD IS JUST ON HOME PAGE
@@ -2166,6 +2166,7 @@ PRODUCT PAGE
     grid-column-gap: 25px;
     grid-template-areas:  "image title"
                           "image price"
+                          "image inStock"
                           "image size"
                           "image colors";
 
@@ -2177,6 +2178,9 @@ PRODUCT PAGE
     }
     .info-price {
       grid-area: price;
+    }
+    .info-in-stock {
+      grid-area: inStock;
     }
     .info-size {
       grid-area: size;
@@ -2192,6 +2196,7 @@ PRODUCT PAGE
                             "ratings"
                             "image"
                             "price"
+                            "inStock"
                             "size"
                             "colors";
     }
@@ -2255,6 +2260,10 @@ PRODUCT PAGE
     font-weight: bold !important;
     color: $priceActual !important;
   }
+  .size-option-display-none {
+    display: none;
+  }
+
 }
 @mixin info-size(){
 // size selection option
