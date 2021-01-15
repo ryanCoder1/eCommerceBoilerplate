@@ -1,8 +1,8 @@
 <template>
   <div >
-    <div class="about-client-container">
-      <h3 class="about-client-head">About</h3>
-      <p class="about-client-body" v-if="about.info != 'null'">{{ about.info }}</p>
+    <div :class="templateName + '-about-client-container'">
+      <h3 :class="templateName + '-about-client-head'">About</h3>
+      <p :class="templateName + '-about-client-body'" v-if="about.info != 'null'">{{ about.info }}</p>
     </div>
   </div>
 </template>
@@ -12,6 +12,7 @@
     data(){
       return{
         about: [],
+
       }
     },
   created () {
@@ -31,6 +32,14 @@
         }
       }
     },
+    computed: {
+      templateName: function(){
+        if(this.$store.state.templateView){
+            this.tempName = this.$store.state.templateView;
+           return this.$store.state.templateView;
+         }
+      }
+    },
     methods: {
       handleScroll: function(){
           this.aboutAnimate();
@@ -38,13 +47,13 @@
       },
       aboutAnimate: function(){
 
-          let elemt = document.getElementsByClassName('about-client-body')[0];
-          let elemtInfo = document.getElementsByClassName('about-client-head')[0];
+          let elemt = document.getElementsByClassName(this.tempName + '-about-client-body')[0];
+          let elemtInfo = document.getElementsByClassName(this.tempName + '-about-client-head')[0];
           let elemtTop = elemt.offsetHeight + 150;
 
           if(window.pageYOffset > elemtTop){
-              elemt.classList.add('about-client-body-move');
-              elemtInfo.classList.add('about-client-head-move');
+              elemt.classList.add(this.tempName + '-about-client-body-move');
+              elemtInfo.classList.add(this.tempName + '-about-client-head-move');
           }
 
       },

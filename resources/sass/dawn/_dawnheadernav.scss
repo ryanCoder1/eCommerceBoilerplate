@@ -1,0 +1,22 @@
+// HEADER NAV STYLES
+.dawn-nav-container-body {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  @include transition-basic(.7s);
+}
+// PERSONAL INFO BAR
+.dawn-nav-personal-info {
+  @include dawnNavPersonalInfo($bgColor: $dawnF2White, $borderColor: $dawnTextGrey, $fontColor: $dawnMainDark, $iconColor: $dawnGreenCompMain);
+}
+// NAVIGATION BAR
+.dawn-nav-body {
+  @include dawnHeaderNav($bgColor: $dawnMainDark, $borderColor: $dawnF2White, $linkColor: $dawnF2White, $linkColorHover: $whiteDark, $shoppingCart: $dawnGreenCompMain, $cartNumBg: $f2White, $cartNumColor: $dawnMainDark);
+
+}
+.dawn-nav-container {
+  @include dawnNavContainer($bgColor: $white, $borderColor: $whiteDark, $headerColor: $mainBlue, $shopBorderColor: $whiteDark, $shopBgColor: $f2White, $linkColor: $textGrey);
+}
+.dawn-category-nav {
+  @include dawnCategoryNav($catColor: $mainBlue, $catColorHover: $white, $catBgColor: $white, $catSlideBg: $mainBlue);
+}

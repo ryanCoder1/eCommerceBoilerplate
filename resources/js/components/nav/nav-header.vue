@@ -1,62 +1,62 @@
 <template>
-    <div id="navContainerBody" class="nav-container" v-if="!isLoggedInDashboard">
+    <div :class="templateName + '-nav-container-body'" v-if="!isLoggedInDashboard">
     <personal-info>
     </personal-info>
       <!-- NAV BODY -->
-      <div class="nav-body">
+      <div :class="templateName + '-nav-body'">
 
-          <div class="left-nav">
+          <div :class="templateName + '-left-nav'">
               <!-- LOGO SECTION -->
 
               <!-- HOME & SHOP LIST -->
-              <ul class="home-shop-links">
+              <ul :class="templateName + '-home-shop-links'">
                   <li class="">
                     <router-link :to="{ path: '/home' }"><a>Home</a></router-link>
                   </li>
                   <li class="" v-on:click="showShop($event)">
                     Shop
-                    <span  class="nav-shop-caret"  v-if="">
+                    <span  :class="templateName + '-nav-shop-caret'"  v-if="">
                        <i class="fa fa-caret-down"></i>
                      </span>
                    </li>
                </ul>
            </div>
-           <div class="right-nav">
+           <div :class="templateName + '-right-nav'">
                <!-- SHOPPING CART INFO -->
-               <div class="shopping-cart-wrapper">
-                 <i class="fa fa-shopping-cart shopping-cart"></i>
+               <div :class="templateName + '-shopping-cart-wrapper'">
+                 <i :class="['fa', 'fa-shopping-cart', templateName + '-shopping-cart']"></i>
                  <span>10</span>
                </div>
                <!-- HAMBURGER MENU FOR SMALL DEVICES -->
-               <div class="open-close-menu">
-                <span class="nav-menu-text">Menu</span>
-                   <span v-if="!openClose" id="open" v-on:click="showMenu()">&#9776;</span>
-                   <span v-if="openClose" id="close" v-on:click="showMenu()">&#9776;</span>
+               <div :class="templateName + '-open-close-menu'">
+                <span :class="templateName + '-nav-menu-text'">Menu</span>
+                   <span v-if="!openClose" :class="templateName + '-open'" v-on:click="showMenu()">&#9776;</span>
+                   <span v-if="openClose" :class="templateName + '-close'" v-on:click="showMenu()">&#9776;</span>
                </div>
              </div>
            </div><!-- END OF NAV BODY -->
 
             <!-- Container that holds featured background for all nav lists -->
-              <div id="navContainer" v-if="container">
-                <div id="navShop" v-if="shop">Shop</div>
+              <div :class="templateName + '-nav-container'" v-if="container">
+                <div :class="templateName + '-nav-shop'" v-if="shop">Shop</div>
 
-                <div id="navWrapper">
-                  <ul class="nav-shop-small" >
+                <div :class="templateName + '-nav-wrapper'">
+                  <ul :class="templateName + '-nav-shop-small'" >
                   <li v-on:click="showShop($event)">
                     Shop
-                    <span class="nav-shop-caret" v-if="">
+                    <span :class="templateName + '-nav-shop-caret'" v-if="">
                        <i class="fa fa-caret-down"></i>
                      </span>
                    </li>
 
                  </ul>
-                 <div class="category-nav" v-on:mouseleave="targetBgSlideHide()">
+                 <div :class="templateName + '-category-nav'" v-on:mouseleave="targetBgSlideHide()">
                   <ul
-                  class="category-nav-ul"
+                  :class="templateName + '-category-nav-ul'"
 
                   v-if="shop">
                     <li
-                      class="category-nav-li"
+                      :class="templateName + '-category-nav-li'"
                       v-for="(category, index) in categories"
                       :key="index">
                         <router-link :to="{ name: 'CategoryProducts', params: {category: category.category} }">
@@ -64,7 +64,7 @@
                           v-on:mouseover="targetBgSlide(index)"
                           v-on:mouseleave="turnOffPulse(index)"
                           v-on:click="saveCategoryIdStore(category.id)">
-                              <span class="category-span">
+                              <span :class="templateName + '-category-span'">
                                 {{ category.category }}
                                   <span
                                       v-for="(productCount, indexProd) in productsCount"
@@ -79,7 +79,7 @@
                           </li>
 
                         </ul>
-                          <span class="category-bg-slide"></span>
+                          <span :class="templateName + '-category-bg-slide'"></span>
                         </div>
                     </li>
 
@@ -87,7 +87,7 @@
 
                     <!-- site and user account links -->
 
-                        <ul id="menuUl" v-if="menu">
+                        <ul :class="templateName + '-menu-ul'" v-if="menu">
                           <li class="" >
                             <router-link :to="{ path: '/home' }">
                               <a v-on:click="closeNav()">Home</a>
@@ -144,6 +144,7 @@ export default {
            container: false,
            categoryMissing: [],
            personalInfo: true,
+           tempName: null,
       }
     },
     created(){
@@ -193,11 +194,18 @@ export default {
           // boolean if false then show Nav bar
           isLoggedInDashboard: function(){
             return this.$store.state.admin.isLoggedInDashboard;
+          },
+          templateName: function(){
+            if(this.$store.state.templateView){
+                this.tempName = this.$store.state.templateView;
+               return this.$store.state.templateView;
+             }
           }
+
     },
     methods:{
       targetBgSlideHide: function(){
-        let elemtSlide = document.getElementsByClassName('category-bg-slide')[0];
+        let elemtSlide = document.getElementsByClassName(this.tempName + '-category-bg-slide')[0];
          elemtSlide.style.top = '-10px';
          setTimeout(function(){
            elemtSlide.style.opacity = 0;
@@ -207,35 +215,35 @@ export default {
       turnOffPulse: function(index){
 
          // get span with number of products and pulse it on hover
-         let elemtNumber = document.getElementsByClassName('category-span')[index].children[0];
+         let elemtNumber = document.getElementsByClassName(this.tempName + '-category-span')[index].children[0];
          if(elemtNumber !== undefined){
-            elemtNumber.classList.remove('category-number-pulse');
+            elemtNumber.classList.remove(this.tempName + '-category-number-pulse');
          }
 
       },
       targetBgSlide: function(index){
-        let elemt = document.getElementsByClassName('category-nav-li');
+        let elemt = document.getElementsByClassName(this.tempName + '-category-nav-li');
         // get elemt offsetTop, the position in px from top of container
         let oSTop = elemt[index].offsetTop;
-        let elemtSlide = document.getElementsByClassName('category-bg-slide')[0];
+        let elemtSlide = document.getElementsByClassName(this.tempName + '-category-bg-slide')[0];
         // set the opacity and from top to slide over element.
         // there is a transition in css on the category-bg-slide element.
          elemtSlide.style.opacity = 1;
          elemtSlide.style.top = oSTop + 2 + 'px';
          // get span with number of products and pulse it on hover
-         let elemtNumber = document.getElementsByClassName('category-span')[index].children[0];
+         let elemtNumber = document.getElementsByClassName(this.tempName + '-category-span')[index].children[0];
          if(elemtNumber !== undefined){
-            elemtNumber.classList.add('category-number-pulse');
+            elemtNumber.classList.add(this.tempName + '-category-number-pulse');
          }
 
       },
       hideNavInfo: function(){
-        let personalHeight = document.getElementById('navPersonalInfo').offsetHeight;
-        let elemt = document.getElementById('navContainerBody');
+        let personalHeight = document.getElementsByClassName(this.tempName + '-nav-personal-info')[0].offsetHeight;
+        let elemt = document.getElementsByClassName(this.tempName + '-nav-container-body')[0];
         elemt.style.top = '-' + personalHeight + 'px';
       },
       showNavInfo: function(){
-        let elemt = document.getElementById('navContainerBody');
+        let elemt = document.getElementsByClassName(this.tempName + '-nav-container-body')[0];
         elemt.style.top = "0px";
       },
       saveCategoryIdStore: function(id){
@@ -248,7 +256,7 @@ export default {
         // hide any class nav-categories that have an zero length children
         // meaning their is an category that doesn't have any products
         setTimeout(function(){
-          let categories = document.getElementsByClassName('nav-categories');
+          let categories = document.getElementsByClassName(this.tempName + '-nav-categories');
           console.log(categories);
           for(let i = 0; i < categories.length; i++){
               if(categories[i].children[0].children.length == 0){
@@ -323,7 +331,6 @@ export default {
                 this.shop = false;
               }
               this.container = !this.container;
-              console.log(this.container);
               if(this.shop === false){
                 this.container = false;
               }
@@ -337,9 +344,6 @@ export default {
         showMenu: function(){
            this.menu = !this.menu;
            this.container = !this.container;
-
-          console.log(this.menu);
-          console.log(this.container);
 
         if(window.innerWidth > 768){
           if(this.menu === true && this.container === true){

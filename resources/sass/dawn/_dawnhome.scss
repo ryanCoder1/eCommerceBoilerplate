@@ -1,0 +1,28 @@
+// HOME PAGE COMPONENT STYLES
+
+
+/*********************************
+
+SHADOW TEMPLATE STYLES
+
+**********************************/
+
+.dawn-home-page {
+  background-color: $dawnBodyBg;
+  .dawn-products-container {
+    @include dawnProductsContainer();
+    @include dawnProducts();
+  }
+  .dawn-about-client-container {
+    @include dawnAbout($headColor: $mainBlue, $contentColor: $textGrey)
+  }
+  .dawn-featured-slide-container {
+    @include dawnSliderFeatured($wrapBgColor: 'transparent', $titleBgColor: $dawnGreenCompMain);
+  }
+  .dawn-specials-slide-container{
+    @include dawnSliderSpecials();
+  }
+  .dawn-banner-client-container{
+    @include dawnBanners($title: $mainBlue, $caption: $textGrey);
+  }
+}

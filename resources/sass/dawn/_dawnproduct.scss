@@ -1,0 +1,27 @@
+
+
+
+.dawn-product-page-container {
+
+  @include dawnProductOverallGrid();
+
+  .dawn-product-add-wrapper{
+      @include dawnProductAddWrapper($bgColor: $white);
+      .dawn-product-page-btn{
+      @include dawnProductSubmitBtn($bgColor: $mainBlue, $hoverBgColor: transparent, $textColor: $f2White);
+    }
+  }
+
+
+  .dawn-product-info-wrapper {
+    @include dawnProductOverallStyle($infoBgColor: $white, $infoBdColor: transparent);
+    @include dawnInfoWrapperGrid();
+    @include dawnInfoWrapper($titleColor: $mainBlue);
+    @include dawnInfoPrice($priceColor: $textGrey, $priceSale: $red ,$priceActual: $mainBlue);
+    @include dawnInfoSize();
+    .dawn-info-colors {
+      @include dawnInfoColors();
+    }
+  }
+
+}

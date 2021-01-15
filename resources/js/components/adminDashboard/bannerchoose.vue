@@ -112,7 +112,6 @@ import LoadDots from '../pages/loaddots.vue';
         }
       },
       saveBanner: function(index, id){
-        console.log(this.$refs['banner' + id][0].checked)
         // the product is checked(index)
           if(this.$refs['banner' + id][0].checked){
             // add 1 to when checked is true
@@ -147,7 +146,6 @@ import LoadDots from '../pages/loaddots.vue';
               this.isActive = false;
             }
           }
-
       },
       removeUpdated: function(){
             let self = this;
@@ -157,7 +155,6 @@ import LoadDots from '../pages/loaddots.vue';
             }, 2000);
       },
       showBanners: function(){
-
           // for scope of this within axios
           let self = this;
 
@@ -181,7 +178,6 @@ import LoadDots from '../pages/loaddots.vue';
 
         },
       saveBanners: function(){
-        console.log(this.bannerList);
           // for scope of this within axios
           let self = this;
           let count = 0;
@@ -290,9 +286,9 @@ input.banner-checkbox {
 }
 
 .banners-image img {
-  max-width: 300px;
+  max-width: 200px;
   width: 100%;
-  height: 75px;
+  height: 200px;
 }
 .banners-title {
   font-size: 17px;

@@ -1,0 +1,12 @@
+// CATEGORY PRODUCTS PAGE STYLES
+
+.shadow-category-shop-container {
+  @include shadowCategoryProducts($shopColor: $textGrey , $shopCatColor: $mainBlue, $catCaptionColor: $mainBlue, $catCaptionBgColor: none, $catSpanTopBg: $greenLight, $catSpanBottomBg: $blueLightMain, $catCaptionBorderColor: transparent);
+  .shadow-products-container {
+    @include shadowProductsContainer();
+    @include shadowProducts();
+  }
+}
+/****************
+PRODUCTS LIST
+******************/

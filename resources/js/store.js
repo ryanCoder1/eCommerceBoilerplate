@@ -37,13 +37,12 @@ export default {
         weatherModView: '',
         chatNewsId: '',
         refreshNewsFeed: false,
+        templateView: '',
   },
   getters: {
-
         navHeaderViews(state){
           return state.navHeaderView;
         }
-
   },
   mutations: {
 
@@ -52,12 +51,32 @@ export default {
           state.navHeaderView = payload;
           localStorage.setItem("navHeaderView", JSON.stringify(state.navHeaderView));
         },
+        templateViewCheck(state, payload){
+          console.log(payload);
+          state.templateView = payload;
+        }
 
   },
   actions: {
 
         setNavHeaderView(context){
           context.commit('setNavHeaderView', payload);
+        },
+        templateViewCheck(context){
+          // for scope of this within axios
+          let self = this;
+
+            axios.post('/templateuseclientshow')
+            .then((res) => {
+               console.log(res.data);
+               if(res.data.using.length && res.data.using !== undefined){
+                 context.commit('templateViewCheck', res.data.using[0].template_name);
+              }
+            }).catch((error) => {
+              console.log(error);
+
+            })
+
         },
 
   },

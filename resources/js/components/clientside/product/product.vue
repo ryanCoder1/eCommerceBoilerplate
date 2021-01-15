@@ -1,15 +1,15 @@
 <template>
-    <div class="product-page-container">
-      <div class="product-info-wrapper">
+    <div :class="templateName + '-product-page-container'">
+      <div :class="templateName + '-product-info-wrapper'">
         <!-- product ratings is in product-title component -->
         <product-title
         v-bind:product-title="product.title">
         </product-title>
 
-        <div class="info-image">
-          <img :class="{'show-image': activeImg}" v-if="product.image_name !== undefined && product.image_name != null && colorClicked.image_name == null" :src="'../storage/images/' + product.image_path + '/' + product.image_name" alt="product image">
-          <img :class="{'show-image': activeImg}" v-if="colorClicked.image_name != null" :src="'../storage/images/' + colorClicked.image_path + '/' + colorClicked.image_name" alt="product image">
-          <img :class="{'show-image': activeImg}" v-if="product.image_name !== undefined && product.image_name == null && colorClicked.image_name == null" :src="'../storage/images/' + productDefaultImage.image_path + '/' + productDefaultImage.image_name" alt="product image">
+        <div :class="templateName + '-info-image'">
+          <img :class="[activeImg ? templateName + '-show-image' : '']" v-if="product.image_name !== undefined && product.image_name != null && colorClicked.image_name == null" :src="'../storage/images/' + product.image_path + '/' + product.image_name" alt="product image">
+          <img :class="[activeImg ? templateName + '-show-image' : '']" v-if="colorClicked.image_name != null" :src="'../storage/images/' + colorClicked.image_path + '/' + colorClicked.image_name" alt="product image">
+          <img :class="[activeImg ? templateName + '-show-image' : '']" v-if="product.image_name !== undefined && product.image_name == null && colorClicked.image_name == null" :src="'../storage/images/' + productDefaultImage.image_path + '/' + productDefaultImage.image_name" alt="product image">
         </div>
         <!-- product prices with sales and original costs -->
         <product-price
@@ -36,11 +36,11 @@
         </product-colors>
 
       </div>
+      <product-add
+       v-if="Object.keys(this.colorClicked).length !== 0"
+       v-bind:color-clicked="colorClicked">
+      </product-add>
 
-      <div class="product-add-wrapper">
-        <!-- add to cart btn -->
-        <h3>add</h3>
-      </div>
       <!-- details of product -->
       <product-description
       v-bind:product-description="product.description">
@@ -56,6 +56,7 @@ import ProductColors from './productcolors.vue';
 import ProductSize from './productsize.vue';
 import ProductTitle from './producttitle.vue';
 import ProductDescription from './productdescription.vue';
+import ProductAdd from './productadd.vue';
 
 export default {
   components: {
@@ -65,6 +66,7 @@ export default {
     'product-size': ProductSize,
     'product-title': ProductTitle,
     'product-description': ProductDescription,
+    'product-add': ProductAdd,
   },
 data(){
   return{
@@ -77,6 +79,7 @@ data(){
     size: '',
     colorClicked: {},
     activeImg: false,
+    tempName: null,
   }
 },
   created(){
@@ -97,10 +100,11 @@ data(){
 
   },
   computed: {
-
-  },
-  watch:{
-
+    templateName: function(){
+      if(this.$store.state.templateView){
+         return this.$store.state.templateView;
+       }
+    }
   },
   methods: {
     addDimensionsInArray: function(){

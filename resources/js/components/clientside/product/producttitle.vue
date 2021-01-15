@@ -1,5 +1,5 @@
 <template>
-      <div class="info-title">
+      <div :class="templateName + '-info-title'">
         <p>{{ productTitle }}</p>
         <product-ratings>
         </product-ratings>
@@ -23,7 +23,13 @@ data(){
 
   }
 },
-
+computed: {
+  templateName: function(){
+    if(this.$store.state.templateView){
+       return this.$store.state.templateView;
+     }
+  }
+},
 
 }
 

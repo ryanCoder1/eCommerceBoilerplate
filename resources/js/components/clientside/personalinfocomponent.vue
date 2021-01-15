@@ -1,8 +1,8 @@
 <template>
   <!-- personal info of nav -->
-  <div id="navPersonalInfo" class="nav-personal-info">
+  <div  :class="templateName + '-nav-personal-info'">
     <div
-      class="personal-info-left">
+      :class="templateName + '-personal-info-left'">
       <phone-number
        v-if="phoneNumberUse">
       </phone-number>
@@ -12,7 +12,7 @@
       </email-address>
     </div>
     <div
-    class="social-media"
+    :class="templateName + '-social-media'"
     v-if="socialMediaUse">
       <social-media-icons v-if="socialMediaUse"></social-media-icons>
     </div>
@@ -41,6 +41,13 @@ import EmailAddress from './emailaddressclient';
       this.getPhoneNumberUse();
       this.getEmailAddressUse();
       this.getSocialMediaUse();
+    },
+    computed: {
+      templateName: function(){
+        if(this.$store.state.templateView){
+           return this.$store.state.templateView;
+         }
+      }
     },
     methods: {
     getPhoneNumberUse: function(){

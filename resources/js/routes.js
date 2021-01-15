@@ -29,11 +29,14 @@ import DashboardOrderDimensions from './components/adminDashboard/orderdimension
 import DashboardPhoneNumberInfo from './components/adminDashboard/phonenumberinfo.vue';
 import DashboardEmailAddressInfo from './components/adminDashboard/emailaddressinfo.vue';
 import DashboardSocialMediaInfo from './components/adminDashboard/socialmediainfo.vue';
+import DashboardTemplates from './components/adminDashboard/templates.vue';
+import DashboardTemplatesAdd from './components/adminDashboard/templatesadd.vue';
 import AdminLogin from './components/adminAuth/login.vue';
 import AdminLogout from './components/adminAuth/logout.vue';
 import AdminCreateAccount from './components/adminAuth/admincreateaccount.vue';
 import Admin from './components/adminAuth/admin.vue';
-import Home from './components/clientside/home.vue';
+import HomeShadow from './components/clientside/templates/shadow/home.vue';
+import TemplateView from './components/clientside/templateview.vue';
 import CateogryProducts from './components/clientside/category.vue';
 import Product from './components/clientside/product/product.vue';
 import DashboardLayout from './components/adminDashboard/dashboardlayout.vue';
@@ -47,14 +50,14 @@ import AdminInvite from './components/adminAuth/adminInvite.vue';
 export const routes = [
 
   { path: '/home',
-    component: Home,
-    name: 'Home',
+    component: TemplateView,
+    name: 'TemplateView',
     meta: {
         requiresAuth: false
     }
  },
   { path: '/',
-  component: Home,
+  component: TemplateView,
    name: 'Index',
    meta: {
        requiresAuth: false
@@ -178,6 +181,20 @@ component: Admin,
            requiresAdminAuth: true
       }
     },
+    { path: '/dashboard/templates',
+    component: DashboardTemplates,
+     name: 'DashboardTemplates',
+     meta: {
+          requiresAdminAuth: true
+     }
+   },
+   { path: '/dashboard/templatesadd',
+   component: DashboardTemplatesAdd,
+    name: 'DashboardTemplatesAdd',
+    meta: {
+         requiresAdminAuth: true
+    }
+  },
     { path: '/dashboard/orderdimensions',
     component: DashboardOrderDimensions,
      name: 'DashboardOrderDimensions',

@@ -11,14 +11,27 @@
 // Mixins
 @import 'mixins';
 
+
 // component imports
 @import 'sidebarmenu';
 @import 'topbarmenu';
 @import 'dashboardforms';
-@import 'headernav';
-@import 'categoryproducts';
-@import 'homecomponents';
-@import 'product';
+
+// SHADOW TEMPLATE
+@import './shadow/shadowmixins';
+@import './shadow/shadowheadernav';
+@import './shadow/shadowcategoryproducts';
+@import './shadow/shadowhome';
+@import './shadow/shadowproduct';
+
+// DAWN TEMPLATE
+@import './dawn/dawnvariables';
+@import './dawn/dawnmixins';
+@import './dawn/dawnheadernav';
+@import './dawn/dawncategoryproducts';
+@import './dawn/dawnhome';
+@import './dawn/dawnproduct';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 

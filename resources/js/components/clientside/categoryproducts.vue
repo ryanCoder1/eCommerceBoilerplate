@@ -1,7 +1,7 @@
 <template>
-      <div id="categoryContainer" class="products-container" v-bind:class="{animateCategory: show }">
-            <ul  class="products-ul" >
-              <li class="products-li" v-for="(product, index) in products" :key="index">
+      <div  :class="[templateName + '-products-container', show ? templateName + '-animateCategory' : '']">
+            <ul  :class="templateName + '-products-ul'" >
+              <li :class="templateName + '-products-li'" v-for="(product, index) in products" :key="index">
                 <products-info
                   v-bind:product="product"
                   v-bind:groups="groups"
@@ -31,12 +31,8 @@ export default {
   data(){
     return{
       show: false,
+      tempName: null,
     }
-  },
-  mounted(){
-
-
-
   },
   watch: {
     products: function(oldProd, newProd){
@@ -52,10 +48,16 @@ export default {
       }
     }
   },
-  methods: {
-
+  computed: {
+    templateName: function(){
+      if(this.$store.state.templateView){
+         this.tempName = this.$store.state.templateView;
+         return this.$store.state.templateView;
+       }
+    },
 
   }
+
 }
 
   </script>

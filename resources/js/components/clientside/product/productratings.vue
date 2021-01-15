@@ -1,5 +1,5 @@
 <template>
-      <div class="info-ratings">
+      <div :class="templateName + '-info-ratings'">
         <span>ratings</span>
       </div>
 </template>
@@ -18,7 +18,13 @@ data(){
 
   }
 },
-
+computed: {
+  templateName: function(){
+    if(this.$store.state.templateView){
+       return this.$store.state.templateView;
+     }
+  }
+},
 
 }
 

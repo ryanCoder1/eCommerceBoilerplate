@@ -3,33 +3,33 @@
       <router-link :to="{ name: 'Product', params: {product: product.title} }">
         <a
         v-on:click="saveProductIdStore(product.id)">
-          <div class="block product-image-block">
-            <img v-if="!groupImageVis && product.image_name != null" class="product-image" :src="'../storage/images/' + product.image_path + '/' + product.image_name" alt="product image">
-            <img v-if="groupImageVis && groupImage.length" class="product-image" :src="'../storage/images/' + groupImage[0].image_path + '/' + groupImage[0].image_name" alt="product image">
-            <img v-if="!groupImageVis && product.image_name == null" class="product-image" :src="'../storage/images/' + productDefaultImage[0].image_path + '/' + productDefaultImage[0].image_name" alt="product image">
-            <div class="product-sales-wrapper">
+          <div :class="[templateName + '-block', templateName + '-product-image-block']">
+            <img v-if="!groupImageVis && product.image_name != null" :class="templateName + '-product-image'" :src="'../storage/images/' + product.image_path + '/' + product.image_name" alt="product image">
+            <img v-if="groupImageVis && groupImage.length" :class="templateName + '-product-image'" :src="'../storage/images/' + groupImage[0].image_path + '/' + groupImage[0].image_name" alt="product image">
+            <img v-if="!groupImageVis && product.image_name == null" :class="templateName + '-product-image'" :src="'../storage/images/' + productDefaultImage[0].image_path + '/' + productDefaultImage[0].image_name" alt="product image">
+            <div :class="templateName + '-product-sales-wrapper'">
               <!-- sale sign in product element -->
-              <div class="product-sales-banner" v-if="product.sale_price > 0 && product.sale_price != null">
-                <span class="dollar-sign-sale">$</span>{{ product.sale_price }}<small> off</small>
+              <div :class="templateName + '-product-sales-banner'" v-if="product.sale_price > 0 && product.sale_price != null">
+                <span :class="templateName + '-dollar-sign-sale'">$</span>{{ product.sale_price }}<small> off</small>
               </div>
             </div>
           </div>
-          <div class="block product-data">
-              <h5 class="title">{{ product.title }}</h5>
+          <div :class="[templateName + '-block', templateName + '-product-data']">
+              <h5 :class="templateName + '-title'">{{ product.title }}</h5>
               <br/>
-              <p class="price">
-                <span class="dollar-sign">$</span><span class="total">{{ product.price }}</span>
+              <p :class="templateName + '-price'">
+                <span :class="templateName + '-dollar-sign'">$</span><span :class="templateName + '-total'">{{ product.price }}</span>
               </p>
-              <div class="slide-color-container">
+              <div :class="templateName + '-slide-color-container'">
                 <div
-                class="slide-bg-color-hex "
+                :class="templateName + '-slide-bg-color-hex' "
                 v-bind:style="[group.product_id == product.id && group.color.match(product.color) == null ? {backgroundColor: group.color} : {display: 'none'} ]"
                 v-for="(group, index) in groups[productIndex]" :key="index"
                 v-on:mouseover="showGroupProductImage(product.id, group.color)"
                 v-on:mouseout="showProductImage(false)">
                 </div>
-                <p class="product-msg" v-if="productImageVis">Loading image</p>
-                <p class="product-msg"  v-if="noProductImageVis">Image not available</p>
+                <p :class="templateName + '-product-msg'" v-if="productImageVis">Loading image</p>
+                <p :class="templateName + '-product-msg'"  v-if="noProductImageVis">Image not available</p>
               </div>
             </div>
         </a>
@@ -61,6 +61,14 @@ export default {
       groupImage: [],
       productImageVis: false,
       noProductImageVis: false,
+
+    }
+  },
+  computed: {
+    templateName: function(){
+      if(this.$store.state.templateView){
+         return this.$store.state.templateView;
+       }
     }
   },
   methods: {

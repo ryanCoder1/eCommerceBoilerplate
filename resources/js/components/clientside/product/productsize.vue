@@ -1,12 +1,12 @@
 <template>
-      <div class="info-size">
+      <div :class="templateName + '-info-size'">
         <label>
-          <div class="inputContainer">
+          <div :class="templateName + '-inputContainer'">
             <p>
-              <span class="labelStyle">Sizes</span>
-              <select class="form-control formInput product-size-select" v-on:change="sizeShowColors()" v-model="size" v-if="sizes.length">
+              <span :class="templateName + '-labelStyle'">Sizes</span>
+              <select :class="[templateName + '-form-control', templateName + '-formInput', templateName + '-product-size-select']" v-on:change="sizeShowColors()" v-model="size" v-if="sizes.length">
                 <option value="" selected disabled>Choose size</option>
-                <option :value="size.dimension" v-for="(size, index) in sizes" :class="[!sizeInStock(size.dimension,index) ? 'size-option-display-none' : '']">{{ size.dimension }}</option>
+                <option :value="size.dimension" v-for="(size, index) in sizes" :class="[!sizeInStock(size.dimension,index) ? templateName + '-size-option-display-none' : '']">{{ size.dimension }}</option>
               </select>
 
             </p>
@@ -37,6 +37,13 @@ mounted(){
   this.getProductDimensions();
 
 },
+computed: {
+  templateName: function(){
+    if(this.$store.state.templateView){
+       return this.$store.state.templateView;
+     }
+  }
+},
 methods: {
   sizeInStock: function(size,index){
 
@@ -55,21 +62,13 @@ methods: {
                return false;
            }
          }else {
-           numDimension = i;
            break;
          }
        }
+       // if after run through loop count is less than productGroupsSize length return true
+       // means the size / dimension was a match before looping through all productGroupsSize length
        if(count < this.productGroupsSize.length){
-          if(this.productGroupsSize[numDimension].in_stock == 0){
-           let option = document.getElementsByClassName('product-size-select')[0];
-            option[index + 1].disabled = true;
-            option[index + 1].innerText = size + ' / out of stock';
-            option[index + 1].style.background = "#dbd9d9";
-           console.log(document.getElementsByClassName('product-size-select'));
-
-         }
-         return true;
-
+          return true;
        }
 
   },

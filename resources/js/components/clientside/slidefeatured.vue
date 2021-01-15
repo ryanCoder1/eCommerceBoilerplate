@@ -1,28 +1,28 @@
 <template>
-    <div id="featuredSlideContainer" v-if="noFeatured">
-        <div id="featuredSlideWrapper" v-visibility-change="visibilityChange">
+    <div :class="templateName + '-featured-slide-container'" v-if="noFeatured">
+        <div :class="templateName + '-featured-slide-wrapper'" v-visibility-change="visibilityChange">
 
-            <ul id="featuredSlideUl" >
-              <li class="featured-slide-li" v-for="(feature, index) in featured" :key="index">
+            <ul :class="templateName + '-featured-slide-ul'" >
+              <li :class="templateName + '-featured-slide-li'" v-for="(feature, index) in featured" :key="index">
                 <images
                   v-bind:feature="feature"
                   v-bind:feature-index="index"
                   >
                 </images>
-                <ul class="featured-caption">
+                <ul :class="templateName + '-featured-caption'">
                     <li
-                      class="caption captionActive"
+                      :class="[templateName + '-caption', templateName + '-caption-active']"
                       v-if="numberOfImgs == index + 1">
-                        <span class="featured-bg-title"></span>
-                        <span class="featured-title">{{ feature.title }}</span>
-                        <span class="featured-caption">{{ feature.caption }}</span>
+                        <span :class="templateName + '-featured-bg-title'"></span>
+                        <span :class="templateName + '-featured-title'">{{ feature.title }}</span>
+                        <span :class="templateName + '-featured-caption'">{{ feature.caption }}</span>
                     </li>
                 </ul>
               </li>
             </ul>
 
-            <ul id="featuredBullets">
-              <li class="featured-bullets featuredActive" v-for="(feature, index) in featured">{{ index }}</li>
+            <ul :class="templateName + '-featured-bullets-ul'">
+              <li :class="[templateName + '-featured-bullets', templateName +  '-featured-active']" v-for="(feature, index) in featured">{{ index }}</li>
             </ul>
 
         </div>
@@ -50,6 +50,7 @@ export default {
       element: '',
       move: 0,
       outerTime: 0,
+      tempName: null,
     }
   },
   mounted(){
@@ -66,20 +67,31 @@ watch: {
   noFeatured: function(newFeat, oldFeat){
     // when noFeatured = true, start setting the variables and running slideshow.
     if(newFeat){
-      console.log('in featured');
       // send to parent Home for loader
       this.$root.$emit('featuredLoad', true);
       let self = this;
-      // get the image list and set width
-      setTimeout(function(){
-        self.element = document.getElementsByClassName("featured-slide-li")[0];
-        self.move = self.element.offsetWidth;
-      },100);
-      setTimeout(function(){
-        self.scrollInfoAuto();
-        self.moveBullets();
-      }, 120);
-    }
+
+            // get the image list and set width
+            setTimeout(function(){
+              if(self.tempName){
+                self.element = document.getElementsByClassName(self.tempName + "-featured-slide-li")[0];
+                self.move = self.element.offsetWidth;
+              }
+            },200);
+            setTimeout(function(){
+              self.scrollInfoAuto();
+              self.moveBullets();
+            }, 220);
+          }
+
+      }
+},
+computed: {
+  templateName: function(){
+    if(this.$store.state.templateView){
+      this.tempName = this.$store.state.templateView;
+       return this.$store.state.templateView;
+     }
   }
 },
   methods: {
@@ -94,23 +106,23 @@ watch: {
         }
       },
      moveBullets: function(){
-      let featuredBullets =  document.getElementsByClassName('featured-bullets');
-      let featuredBulletsAl = document.querySelectorAll('.featured-bullets.featuredActive');
+      let featuredBullets =  document.getElementsByClassName(this.tempName + '-featured-bullets');
+      let featuredBulletsAl = document.querySelectorAll('.'+ this.tempName + '-featured-bullets.' + this.tempName + '-featured-active');
 
       for (let i = 0; i < this.featured.length; i++) {
-        if(featuredBullets[i].classList.remove('featuredActive') !== undefined){
-           featuredBulletsAl[i].classList.remove('featuredActive')
+        if(featuredBullets[i].classList.remove(this.tempName + '-featured-active') !== undefined){
+           featuredBulletsAl[i].classList.remove(this.tempName + '-featured-active')
          }
        }
        if(this.numberOfBullets > this.featured.length - 1){
         this.numberOfBullets = 0;
         }
-       featuredBullets[this.numberOfBullets].classList.add('featuredActive');
+       featuredBullets[this.numberOfBullets].classList.add(this.tempName + '-featured-active');
        this.numberOfBullets++;
      },
     scrollInfoAuto: function(){
 
-        let liCount =  document.getElementsByClassName("featured-slide-img").length;
+        let liCount =  document.getElementsByClassName(this.tempName + '-featured-slide-img').length;
         let self = this;
       this.outerTime = setInterval(function(){
 
@@ -131,11 +143,11 @@ watch: {
       }, 5000);
   },
     addRemoveClassActiveImg: function(numberOfImgs){
-      var elems = document.querySelectorAll(".featured-slide-img");
+      var elems = document.querySelectorAll('.' + this.tempName + '-featured-slide-img');
           [].forEach.call(elems, function(el) {
-              el.classList.remove("featuredActiveImg");
+              el.classList.remove(this.tempName + '-featured-active-img');
           });
-        document.getElementsByClassName("featured-slide-img")[numberOfImgs].classList.add('featuredActiveImg');
+        document.getElementsByClassName(this.tempName + '-featured-slide-img')[numberOfImgs].classList.add(this.tempName + '-featured-active-img');
     },
     getFeatured: function(){
         // for scope of this within axios

@@ -71,7 +71,7 @@ router.beforeEach((to, from, next) =>{
   else{
     next();
   }
-  if(to.path == '/home' || to.path.indexOf('/category/') != -1 || to.path.indexOf('/product/') != -1){
+  if(to.path == '/' || to.path == '/home' || to.path.indexOf('/category/') != -1 || to.path.indexOf('/product/') != -1){
       store.dispatch('admin/logoutQuiet');
     setTimeout(() => {
       router.app.activeLoader = false;
@@ -117,7 +117,7 @@ const app = new Vue({
       activeLoader: false,
     },
 mounted() {
-
+   store.dispatch('templateViewCheck');
 
  },
  watch: {

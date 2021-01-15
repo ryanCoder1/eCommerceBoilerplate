@@ -1,21 +1,21 @@
 <template>
-    <div class="category-shop-container">
+    <div :class="templateName + '-category-shop-container'">
       <!-- is the trail of pages shown -->
-      <h5 class="category-shop-trail" v-bind:class="{animateShopTrail: show }">
-        Shop > <span class="shop-trail-span">{{ category }}</span>
+      <h5 :class="[templateName + '-category-shop-trail',show ? templateName + '-animateShopTrail' : '' ]" >
+        Shop > <span :class="templateName + '-shop-trail-span'">{{ category }}</span>
       </h5>
-      <div class="category-caption-wrapper"  v-bind:class="{animateCategoryCaptionP: show }" v-if="categoryInfo.length">
+      <div :class="[templateName + '-category-caption-wrapper', show ? templateName + '-animateCategoryCaptionP' : '' ]"  v-if="categoryInfo.length">
         <!-- span are borders that wrap caption -->
-        <span class="category-border-top " v-bind:class="{animateCategoryCaption: show }"></span>
-        <span class="category-border-left" v-bind:class="{animateCategoryCaption: show }"></span>
-        <p class="category-caption"   v-if="categoryInfo[0].caption != null">
+        <span :class="[templateName + '-category-border-top', show ? templateName + '-animateCategoryCaption' : '']"></span>
+        <span :class="[templateName + '-category-border-left', show ? templateName + '-animateCategoryCaption' : '']" ></span>
+        <p :class="templateName + '-category-caption'"   v-if="categoryInfo[0].caption != null">
           {{ categoryInfo[0].caption }}
         </p>
         <!-- if caption == null then show the else element -->
         <p v-else>Thanks for supporting us! </p>
         <!-- span are borders that wrap caption -->
-        <span class="category-border-bottom" v-bind:class="{animateCategoryCaption: show }"></span>
-        <span class="category-border-right" v-bind:class="{animateCategoryCaption: show }"></span>
+        <span :class="[templateName + '-category-border-bottom', show ? templateName + '-animateCategoryCaption' : '' ]"></span>
+        <span :class="[templateName + '-category-border-right', show ? templateName + '-animateCategoryCaption' : '']"></span>
       </div>
       <category-products></category-products>
       <category-products
@@ -51,13 +51,15 @@
     setTimeout(() => {
         this.showProductInfo();
     },2000);
-
-
-
   },
   computed: {
     category: function(){
       return this.$route.params.category;
+    },
+    templateName: function(){
+      if(this.$store.state.templateView){
+         return this.$store.state.templateView;
+       }
     }
   },
   watch:{

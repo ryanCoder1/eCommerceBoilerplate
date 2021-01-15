@@ -11,6 +11,7 @@
      @include dashboard-h5($textGrey, $white);
    }
    .form {
+
        @include forms-dashboard(100%, 100%, $text: $mainBlue, $bg: $white, $fileBg: $blue, $textAlt: $blue);
        .dashboard-page-btn {
            @include dashboardSubmitBtn($bgColor: $mainBlue, $hoverBgColor: $hoverBlue, $textColor: $f2White);
@@ -32,6 +33,8 @@
    .dashboard-add-btn {
        @include dashboardSubmitBtn($bgColor: $mainBlue, $hoverBgColor: $mainBlue, $textColor: $f2White);
    }
+
+
   /****************************
   product edit image / groups
   *****************************/

@@ -1,0 +1,27 @@
+// HOME PAGE COMPONENT STYLES
+
+
+/*********************************
+
+SHADOW TEMPLATE STYLES
+
+**********************************/
+
+.shadow-home-page {
+  .shadow-products-container {
+    @include shadowProductsContainer();
+    @include shadowProducts();
+  }
+  .shadow-about-client-container {
+    @include shadowAbout($headColor: $mainBlue, $contentColor: $textGrey)
+  }
+  .shadow-featured-slide-container {
+    @include shadowSliderFeatured($wrapBgColor: $white, $titleBgColor: $greenLight);
+  }
+  .shadow-specials-slide-container{
+    @include shadowSliderSpecials();
+  }
+  .shadow-banner-client-container{
+    @include shadowBanners($edgeOneBg: $greenLight, $edgeTwoBg: $blueDark, $title: $mainBlue, $caption: $textGrey);
+  }
+}

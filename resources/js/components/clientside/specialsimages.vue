@@ -1,6 +1,6 @@
 <template>
     <div>
-      <img  class="infoImgBlock activeImgBlock" :src="'../storage/images/' + special.image_path + '/' + special.image_name" alt="product image">
+      <img :class="[templateName + '-info-img-block', templateName + '-active-img-block']" :src="'../storage/images/' + special.image_path + '/' + special.image_name" alt="product image">
     </div>
 </template>
 
@@ -19,12 +19,13 @@ export default {
       noSpecials: false,
     }
   },
-  mounted(){
-    console.log(this.special);
-  },
-  methods: {
-
+  computed: {
+    templateName: function(){
+      if(this.$store.state.templateView){
+         return this.$store.state.templateView;
+       }
     }
+  }
 
 }
 

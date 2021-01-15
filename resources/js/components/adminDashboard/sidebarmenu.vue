@@ -13,6 +13,16 @@
               <router-link :to="{ path: '/dashboard' }"><a>Dashboard</a></router-link>
             </li>
             <li v-on:click="dropMenu($event, null)">
+              <i class="fa fa-eye"></i>
+              <a href="#">Templates</a>
+              <i class="fa fa-caret-down i-visited"></i>
+              <ul class="drop-down-uls" v-show="showTemplates">
+                <li><router-link :to="{ path: '/dashboard/templates'  }"><a  v-on:click="closeMenuContainer()">Template</a></router-link></li>
+                <li><router-link :to="{ path: '/dashboard/templatesadd' }"><a  v-on:click="closeMenuContainer()">Template Add</a></router-link></li>
+
+              </ul>
+            </li>
+            <li v-on:click="dropMenu($event, null)">
               <i class='far fa-user'></i>
               <a href="#">Personal Info</a>
               <i class="fa fa-caret-down i-visited"></i>
@@ -103,7 +113,9 @@ export default {
         showProdCat: false,
         showSlides: false,
         showPersInfo: false,
+        showTemplates: false,
         subMenuChoice: [
+          'Templates',
           'Personal Info',
           'Categories',
           'Products',
@@ -151,25 +163,30 @@ export default {
           if(this.subMenuChoice[i].match(this.subMenu) == null){
               let menu = this.subMenuChoice[i];
               switch(menu) {
+                case 'Templates':
+                    this.showTemplates = false;
+                    // rotate all arrows back to 0 degrees
+                    this.rotateArrowBack(0);
+                break;
                 case 'Personal Info':
                     this.showPersInfo = false;
                     // rotate all arrows back to 0 degrees
-                    this.rotateArrowBack(0);
+                    this.rotateArrowBack(1);
                 break;
                 case 'Categories':
                     this.showProdCat = false;
                     // rotate all arrows back to 0 degrees
-                    this.rotateArrowBack(1);
+                    this.rotateArrowBack(2);
                 break;
                 case 'Products':
                     this.showProducts = false;
                     // rotate all arrows back to 0 degrees
-                    this.rotateArrowBack(2);
+                    this.rotateArrowBack(3);
                 break;
                 case 'Slides':
                     this.showSlides = false;
                     // rotate all arrows back to 0 degrees
-                    this.rotateArrowBack(3);
+                    this.rotateArrowBack(4);
                 break;
                 default:
                   return false;
@@ -180,6 +197,14 @@ export default {
 
 
       switch(menuLi) {
+        case 'Templates':
+            this.showTemplates = !this.showTemplates;
+                if(this.showTemplates){
+                  this.rotateArrow(next_sibling, 180);
+                }else{
+                  this.rotateArrow(next_sibling, 0);
+                }
+        break;
         case 'Personal Info':
             this.showPersInfo = !this.showPersInfo;
                 if(this.showPersInfo){

@@ -1,8 +1,8 @@
 <template>
-    <div  class="products-container">
-      <div class="products-client-head">Products</div>
-          <ul  class="products-ul">
-            <li class="products-li" v-for="(product, index) in products" :key="index">
+    <div v-if="templateName.length" :class="templateName + '-products-container'">
+      <div :class="templateName + '-products-client-head'">Products</div>
+          <ul  :class="templateName + '-products-ul'">
+            <li :class="templateName + '-products-li'" v-for="(product, index) in products" :key="index">
               <products-info
                 v-bind:product="product"
                 v-bind:groups="productGroups"
@@ -34,6 +34,13 @@ export default {
   },
   mounted(){
     this.showProductInfo();
+  },
+  computed: {
+    templateName: function(){
+      if(this.$store.state.templateView){
+         return this.$store.state.templateView;
+       }
+    }
   },
   methods: {
 

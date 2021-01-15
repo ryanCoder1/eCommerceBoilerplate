@@ -1,0 +1,27 @@
+
+
+
+.shadow-product-page-container {
+
+  @include shadowProductOverallGrid();
+
+  .shadow-product-add-wrapper{
+      @include shadowProductAddWrapper($bgColor: $white);
+      .shadow-product-page-btn{
+      @include shadowProductSubmitBtn($bgColor: $mainBlue, $hoverBgColor: transparent, $textColor: $f2White);
+    }
+  }
+
+
+  .shadow-product-info-wrapper {
+    @include shadowProductOverallStyle($infoBgColor: $white, $infoBdColor: transparent);
+    @include shadowInfoWrapperGrid();
+    @include shadowInfoWrapper($titleColor: $mainBlue);
+    @include shadowInfoPrice($priceColor: $textGrey, $priceSale: $red ,$priceActual: $mainBlue);
+    @include shadowInfoSize();
+    .shadow-info-colors {
+      @include shadowInfoColors();
+    }
+  }
+
+}

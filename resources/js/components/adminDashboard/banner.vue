@@ -12,12 +12,25 @@
         <span v-if="!bannerVis">Current Banners +</span>
         <span v-if="bannerVis">Close Banners -</span>
        </h4>
-       <h4 class="text-secondary" v-if="bannerVis">
-         <!-- holds the already listed banners to choose from -->
-         <banner-choose
-         v-if="bannerVis">
-         </banner-choose>
+
+
+       <h4 class="text-secondary banner-link" v-on:click="deleteImages()" >
+         <span v-if="!bannerDeleteVis">Delete Banners +</span>
+         <span v-if="bannerDeleteVis">Close Delete Banners -</span>
         </h4>
+
+       <h4 class="text-secondary" v-if="bannerVis">
+           <!-- holds the already listed banners to choose from -->
+           <banner-choose
+           v-if="bannerVis">
+           </banner-choose>
+       </h4>
+       <h4 class="text-secondary" v-if="bannerDeleteVis">
+           <!-- holds the already listed banners to choose from -->
+           <banner-delete
+           v-if="bannerDeleteVis">
+         </banner-delete>
+       </h4>
       <form id="dashboardBannerCreate" class="form py-5 pr-3">
 
              <div class="input-container-file">
@@ -98,14 +111,17 @@
 
 import LoadDots from '../pages/loaddots.vue';
 import BannerChoose from './bannerchoose.vue';
+import BannerDelete from './bannerdelete.vue';
 import { anchorsPage } from '../../helper/anchor.js';
 import { errorHandle } from '../../helper/errors';
 import CheckComponent from './checkcomponent.vue';
+
 
   export default {
     components: {
       'check-component': CheckComponent,
       'banner-choose': BannerChoose,
+      'banner-delete': BannerDelete,
       'load-dots': LoadDots,
     },
     data(){
@@ -146,6 +162,7 @@ import CheckComponent from './checkcomponent.vue';
         banner: 'Banner',
         bannerLC: 'banner',
         bannerVis: false,
+        bannerDeleteVis: false,
       }
     },
     created(){
@@ -207,6 +224,9 @@ import CheckComponent from './checkcomponent.vue';
       },
       showImages: function(){
         this.bannerVis = !this.bannerVis;
+      },
+      deleteImages: function(){
+        this.bannerDeleteVis = !this.bannerDeleteVis;
       },
       anchorPage: function(id){
         anchorsPage(id);
@@ -347,9 +367,9 @@ import CheckComponent from './checkcomponent.vue';
   text-align: center;
 }
 .banner-preview img{
-  max-width: 320px;
+  max-width: 200px;
   width: 100%;
-  height: 100px;
+  height: 200px;
   animation: bannerSlide .6s, ease-in-out, .0s, forwards;
   }
   @keyframes bannerSlide {

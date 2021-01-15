@@ -1,21 +1,26 @@
 <template>
-  <div class="banner-client-container">
 
-    <div class="grid-two" v-if="banNum == 1">
+  <div :class="templateName + '-banner-client-container'">
+    <!--
+
+    BANNER NUMBER 1
+
+  -->
+    <div :class="templateName + '-grid-two'" v-if="banNum == 1">
       <div
       v-if="banners.length"
-      class="banner-client-info-two">
-        <h3 class="banner-client-title-two" v-if="banners.length && banners[1].title != 'null'">{{ banners[1].title }}</h3>
-        <p class="banner-client-caption-two" v-if="banners.length && banners[1].caption != 'null'">{{ banners[1].caption }}</p>
+      :class="templateName + '-banner-client-info-two'">
+        <h3 :class="templateName + '-banner-client-title-two'" v-if="banners.length && banners[1].title != 'null'">{{ banners[1].title }}</h3>
+        <p :class="templateName + '-banner-client-caption-two'" v-if="banners.length && banners[1].caption != 'null'">{{ banners[1].caption }}</p>
       </div>
 
-      <ul class="banner-client-ul-two">
+      <ul :class="templateName + '-banner-client-ul-two'">
         <li v-if="banners.length">
-          <div class="banenr-client-li-container">
-            <img class="banner-client-image" :src="'../storage/images/' + banners[1].image_path + '/' + banners[1].image_name" alt="banner image">
+          <div :class="templateName + '-banenr-client-li-container'">
+            <img :class="templateName + '-banner-client-image'" :src="'../storage/images/' + banners[1].image_path + '/' + banners[1].image_name" alt="banner image">
           </div>
           <span
-          class="banner-background-two" >
+          :class="templateName + '-banner-background-two'" >
           </span>
         </li>
       </ul>
@@ -23,25 +28,25 @@
 
     <!--
 
-    BANNER NUMBER 1
+    BANNER NUMBER 0
 
   -->
-    <div class="grid-one" v-if="banNum == 0">
-      <ul class="banner-client-ul-one">
+    <div :class="templateName + '-grid-one'" v-if="banNum == 0">
+      <ul :class="templateName + '-banner-client-ul-one'">
         <li v-if="banners.length">
-          <div class="banenr-client-li-container">
-            <img class="banner-client-image" :src="'../storage/images/' + banners[0].image_path + '/' + banners[0].image_name" alt="banner image">
+          <div :class="templateName + '-banenr-client-li-container'">
+            <img :class="templateName + '-banner-client-image'" :src="'../storage/images/' + banners[0].image_path + '/' + banners[0].image_name" alt="banner image">
           </div>
           <span
-          class="banner-background-one" >
+          :class="templateName + '-banner-background-one'" >
           </span>
         </li>
       </ul>
       <div
       v-if="banners.length"
-      class="banner-client-info-one">
-        <h3 class="banner-client-title-one" v-if="banners.length && banners[0].title != 'null'">{{ banners[0].title }}</h3>
-        <p class="banner-client-caption-one" v-if="banners.length && banners[0].caption != 'null'">{{ banners[0].caption }}</p>
+      :class="templateName + '-banner-client-info-one'">
+        <h3 :class="templateName + '-banner-client-title-one'" v-if="banners.length && banners[0].title != 'null'">{{ banners[0].title }}</h3>
+        <p :class="templateName + '-banner-client-caption-one'" v-if="banners.length && banners[0].caption != 'null'">{{ banners[0].caption }}</p>
       </div>
     </div>
   </div>
@@ -55,23 +60,28 @@
     data(){
       return{
         banners: [],
+        tempName: null,
       }
     },
-  created () {
-
-  },
   destroyed () {
     window.removeEventListener('scroll', this.handleScroll);
   },
     mounted() {
       this.showBanner();
-
     },
     watch:{
       banners: function(newBan, oldBan){
         if(newBan){
             window.addEventListener('scroll', this.handleScroll);
         }
+      }
+    },
+    computed: {
+      templateName: function(){
+        if(this.$store.state.templateView){
+          this.tempName = this.$store.state.templateView;
+           return this.$store.state.templateView;
+         }
       }
     },
     methods: {
@@ -91,25 +101,25 @@
       },
       bannerMoveOne: function(){
 
-          let elemt = document.getElementsByClassName('banner-client-ul-one')[0];
-          let elemtInfo = document.getElementsByClassName('banner-client-info-one')[0];
+          let elemt = document.getElementsByClassName(this.tempName + '-banner-client-ul-one')[0];
+          let elemtInfo = document.getElementsByClassName(this.tempName + '-banner-client-info-one')[0];
           let elemtTop = elemt.offsetHeight;
 
           if(window.pageYOffset > elemtTop){
-              elemt.classList.add('banner-client-ul-one-move');
-              elemtInfo.classList.add('banner-client-info-one-move');
+              elemt.classList.add(this.tempName + '-banner-client-ul-one-move');
+              elemtInfo.classList.add(this.tempName + '-banner-client-info-one-move');
           }
 
       },
       bannerMoveTwo: function(){
 
-          let elemt = document.getElementsByClassName('banner-client-ul-two')[0];
-          let elemtInfo = document.getElementsByClassName('banner-client-info-two')[0];
+          let elemt = document.getElementsByClassName(this.tempName + '-banner-client-ul-two')[0];
+          let elemtInfo = document.getElementsByClassName(this.tempName + '-banner-client-info-two')[0];
           let elemtTop = elemt.offsetHeight;
 
           if(window.pageYOffset > elemtTop){
-              elemt.classList.add('banner-client-ul-two-move');
-              elemtInfo.classList.add('banner-client-info-two-move');
+              elemt.classList.add(this.tempName + '-banner-client-ul-two-move');
+              elemtInfo.classList.add(this.tempName + '-banner-client-info-two-move');
           }
 
       },

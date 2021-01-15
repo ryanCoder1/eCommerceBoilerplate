@@ -80,6 +80,7 @@ Route::group([ 'middleware' => 'CheckDashboardToken'],function () {
     Route::post('/featureduse', 'Admin\SliderFeaturedController@showFeaturedUse');
     Route::post('/featureduseupdate', 'Admin\SliderFeaturedController@editFeaturedUse');
     Route::post('/bannerstore', 'Admin\BannerController@store');
+    Route::post('/bannerdelete', 'Admin\BannerController@destroy');
     Route::post('/bannershow', 'Admin\BannerController@show');
     Route::post('/bannerchoose', 'Admin\BannerController@bannerChoose');
     Route::post('/banneruseshow', 'Admin\BannerController@bannerUseShowCreate');
@@ -100,8 +101,13 @@ Route::group([ 'middleware' => 'CheckDashboardToken'],function () {
     Route::post('/emailaddressusestore', 'Admin\PersonalInfoController@emailAddressUseShowStore');
     Route::post('/emailaddressshow', 'Admin\PersonalInfoController@emailAddressShowCreate');
     Route::post('/emailaddressstore', 'Admin\PersonalInfoController@emailAddressShowStore');
+    Route::post('/templatestore', 'Admin\TemplatesController@templateStore');
+    Route::post('/templatesshow', 'Admin\TemplatesController@templatesShow');
+    Route::post('/templateusestore', 'Admin\TemplatesController@editTemplateUse');
+    Route::post('/templateuseshow', 'Admin\TemplatesController@showTemplateUse');
 });
 // CLIENT SIDE NO RESTRICTIONS
+  Route::post('/templateuseclientshow', 'Clientside\TemplatesController@showTemplateUse');
   Route::post('/specialsuseclient', 'Clientside\SlidesClientsideController@showSpecialsUse');
   Route::post('/specialsshowclient', 'Clientside\SlidesClientsideController@showSpecials');
   Route::post('/featureduseclient', 'Clientside\SlidesClientsideController@showFeaturedUse');

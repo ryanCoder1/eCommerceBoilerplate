@@ -205,12 +205,45 @@ class BannerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  array $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        // loop thru all incoming delete banner array elements
+        for($i = 0; $i < $request->input('count'); $i++){
+
+          // retrieve all images from product_id
+          $images = DB::table('banner')
+                          ->select('banner.*')
+                          ->where('id', $request->input('bannerId'. $i))
+                          ->get();
+            // var_dump($images);
+          if(count($images) > 0){
+            // loop through all images and delete one at a time
+            for($m = 0; $m < count($images); $m++){
+                $id = $images[$m]->id;
+                $filePath = $images[$m]->image_path;
+                $fileName = $images[$m]->image_name;
+
+          // if storage disk path is deleted then delete record from db table also
+           if(Storage::disk('uploads')->delete($filePath.'/'.$fileName)){
+                 $this->deleteDirectoryIfEmpty($filePath);
+                 DB::table('banner')
+                        ->where('id', $id)
+                        ->delete();
+
+            }
+          }
+        }else {
+          // 500 error.
+          return error500Email('Deleting of Banner has problem in destory method in Admin/BannerController');
+        }
+
+      }// end of for loop for request ids
+        return response()->json(['success' => true]);
+
+
     }
     /**
      * Show the form for creating a new resource.
@@ -356,6 +389,28 @@ class BannerController extends Controller
 
       Mail::to(EMAIL_ERRORS_TO)->send(new ErrorsEmail($error));
       return response()->json(['message' => $error], 500);
+
+    }
+
+
+    /**
+     * Delete Directory in storage if empty
+     *
+     * @param  obj File
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteDirectoryIfEmpty($filePath){
+
+        // Target directory.
+        if($filePath != null){
+            $files = Storage::Disk('uploads')->files($filePath);
+              if(count($files) == 0){
+                Storage::Disk('uploads')->deleteDirectory($filePath);
+                return true;
+              }else{
+                return false;
+              }
+          }
 
     }
 }

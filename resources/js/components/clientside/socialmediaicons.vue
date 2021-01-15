@@ -1,7 +1,7 @@
 <template>
   <div >
     <span
-    class="social-media-container"
+    :class="templateName + '-social-media-container'"
     v-for="(icon, index) in socialMedia"
     :key="index"
     v-if="icon.link != 'null'"
@@ -11,13 +11,13 @@
       :href="'//' + icon.link"
       v-on:click="externalLink(icon.link)"
       v-on:mouseover="showIconName($event)">
-        <font-awesome-icon :icon="{ prefix: 'fab', iconName: icon.name }"  class="social-media-icon">
+        <font-awesome-icon :icon="{ prefix: 'fab', iconName: icon.name }"  :class="templateName + '-social-media-icon'">
           {{ checkFonts(index)}}
         </font-awesome-icon>
       </a>
       <!-- show icon name on hover of icon for a few seconds -->
       <span
-      class="social-media-icon-name"
+      :class="templateName + '-social-media-icon-name'"
       >{{ icon.name }}</span>
     </span>
   </div>
@@ -35,6 +35,13 @@
     },
     mounted() {
       this.getSocialMedia();
+    },
+    computed: {
+      templateName: function(){
+        if(this.$store.state.templateView){
+           return this.$store.state.templateView;
+         }
+      }
     },
     methods: {
       fadeIconName: function(event){

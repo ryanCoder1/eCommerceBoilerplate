@@ -1,21 +1,21 @@
 
 <template>
     <div>
-      <div class="inline-block image-block">
-        <img  class="info-img activeInfo activeImg" :src="'../storage/images/' + special.image_path + '/' + special.image_name" alt="product image">
+      <div :class="[templateName + '-inline-block', templateName + '-image-block']">
+        <img  :class="[templateName + '-info-img', templateName + '-active-info', templateName + '-active-img']" :src="'../storage/images/' + special.image_path + '/' + special.image_name" alt="product image">
       </div>
-      <div class="inline-block info-block">
-        <h5 class="title">{{ special.title }}</h5>
-        <p class="desc">{{ special.description.substring(0,125) + ".." }}</p>
-        <p class="price">
-          <span class="dollar-sign">$</span><span class="total">{{ special.price - special.sale_price }}</span>
-          <span class="sale text-danger">
+      <div :class="[templateName + '-inline-block', templateName + '-info-block']">
+        <h5 :class="templateName + '-title'">{{ special.title }}</h5>
+        <p :class="templateName + '-desc'">{{ special.description.substring(0,125) + ".." }}</p>
+        <p :class="templateName + '-price'">
+          <span :class="templateName + '-dollar-sign'">$</span><span class="total">{{ special.price - special.sale_price }}</span>
+          <span :class="[templateName + '-sale', templateName + '-text-danger']">
           {{ special.sale_price }}
           </span>
         </p>
-        <div class="slide-color-container">
+        <div :class="templateName + '-slide-color-container'">
           <div
-          class="slide-bg-color-hex "
+          :class="templateName + '-slide-bg-color-hex' "
           v-bind:style="[group.product_id == special.id ? {backgroundColor: group.color} : '' ]"
           v-for="(group, index) in groups[specialIndex]" :key="index">
           </div>
@@ -50,9 +50,12 @@ export default {
       uniqueGroups: [],
     }
   },
-  mounted(){
-
-     // this.filterColors();
+  computed: {
+    templateName: function(){
+      if(this.$store.state.templateView){
+         return this.$store.state.templateView;
+       }
+    }
   },
   methods: {
       filterColors: function(){

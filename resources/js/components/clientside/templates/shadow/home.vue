@@ -1,5 +1,5 @@
 <template>
-    <div class="home-page">
+    <div :class="templateName + '-home-page'">
 
       <!--
           components that make the home page
@@ -34,13 +34,13 @@
 
 
 <script>
-import SlideSpecials from './slidespecials.vue';
-import SlideFeatured from './slidefeatured.vue';
-import ProductsHome from './productshome.vue';
-import BannerOne from './bannerhome.vue';
-import BannerTwo from './bannerhome.vue';
-import AboutHome from './abouthome.vue';
-import LoadDots from '../pages/loaddots.vue';
+import SlideSpecials from '../../slidespecials.vue';
+import SlideFeatured from '../../slidefeatured.vue';
+import ProductsHome from '../../productshome.vue';
+import BannerOne from '../../bannerhome.vue';
+import BannerTwo from '../../bannerhome.vue';
+import AboutHome from '../../abouthome.vue';
+import LoadDots from '../../../pages/loaddots.vue';
 
 export default {
   components: {
@@ -65,8 +65,14 @@ export default {
     // once featuredLoad is done, update loader to true and show rest of home components.
     this.$root.$on('featuredLoad', (value) => {
       this.loader = true;
-      console.log(this.loader);
     })
+  },
+  computed: {
+    templateName: function(){
+      if(this.$store.state.templateView){
+         return this.$store.state.templateView;
+       }
+    }
   },
   mounted(){
     this.getFeaturedUse();

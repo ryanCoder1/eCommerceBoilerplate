@@ -1,11 +1,11 @@
 <template>
-  <div>
-      <div class="info-in-stock" v-if="Object.keys(this.colorClicked).length === 0">
+  <div :class="templateName + '-info-in-stock'">
+      <div  v-if="Object.keys(this.colorClicked).length === 0">
         <span>In Stock: <span> {{ product.in_stock }}</span></span>
       </div>
 
       <!-- if colorClicked from color component -->
-      <div class="info-in-stock" v-if="Object.keys(this.colorClicked).length !== 0">
+      <div v-if="Object.keys(this.colorClicked).length !== 0">
         <span>In Stock: <span> {{ colorClicked.in_stock }}</span></span>
       </div>
     </div>
@@ -37,7 +37,14 @@ watch: {
       }
     }
   }
-}
+},
+computed: {
+  templateName: function(){
+    if(this.$store.state.templateView){
+       return this.$store.state.templateView;
+     }
+  }
+},
 
 
 }

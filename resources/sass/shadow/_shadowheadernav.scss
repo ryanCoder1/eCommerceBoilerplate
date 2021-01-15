@@ -1,0 +1,22 @@
+// HEADER NAV STYLES
+.shadow-nav-container-body {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  @include transition-basic(.7s);
+}
+// PERSONAL INFO BAR
+.shadow-nav-personal-info {
+  @include shadowNavPersonalInfo($bgColor: $greenLight, $borderColor: $greenLighter, $fontColor: $white, $iconColor: $f2White);
+}
+// NAVIGATION BAR
+.shadow-nav-body {
+  @include shadowHeaderNav($bgColor: $white, $borderColor: $whiteDark, $linkColor: $textGrey, $linkColorHover: $whiteDark, $shoppingCart: $greenLight, $cartNumBg: $f2White, $cartNumColor: $mainBlue);
+
+}
+.shadow-nav-container {
+  @include shadowNavContainer($bgColor: $white, $borderColor: $whiteDark, $headerColor: $mainBlue, $shopBorderColor: $whiteDark, $shopBgColor: $f2White, $linkColor: $textGrey);
+}
+.shadow-category-nav {
+  @include shadowCategoryNav($catColor: $mainBlue, $catColorHover: $white, $catBgColor: $white, $catSlideBg: $mainBlue);
+}
